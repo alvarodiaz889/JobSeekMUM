@@ -21,11 +21,11 @@
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
     <!-- Plugin CSS -->
-    <link href="src/main/resources/assets/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="<%=request.getContextPath() %>/resources/assets/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
     <!-- Theme CSS -->
 
-    <link href="src/main/resources/assets/css/creative.css" rel="stylesheet">
+    <link href="<%=request.getContextPath() %>/resources/assets/css/creative.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -72,7 +72,21 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                ...
+                	<form action="<%=request.getContextPath()%>/post.do">
+						<table>
+							<tr>
+								<td><label>Email</label></td>
+								<td><input type="email" name="email" /></td>
+							</tr>
+							<tr>
+								<td><label>Password</label></td>
+								<td><input type="password" name="password" /></td>
+							</tr>
+							<tr>
+								<td><input type="submit" value="login" /></td>
+							</tr>
+						</table>
+					</form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -95,21 +109,7 @@
         </div>
     </header>	
 	
-	<form action="<%=request.getContextPath()%>/post.do">
-		<table>
-			<tr>
-				<td><label>Email</label></td>
-				<td><input type="email" name="email" /></td>
-			</tr>
-			<tr>
-				<td><label>Password</label></td>
-				<td><input type="password" name="password" /></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="login" /></td>
-			</tr>
-		</table>
-	</form>
+	
 	
 	<h1>${msg }</h1>
 
@@ -150,7 +150,7 @@
 			</tr>
 		</table>
 		<input type="submit" value="signUp" />
-	</form>
+	</form>q
 </body>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/assets/js/bootstrap.min.js"></script>
 </html>
