@@ -8,7 +8,6 @@ import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
@@ -22,6 +21,7 @@ public class GenericDao<T> {
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
 	private DataSourceTransactionManager transactionManager;
+	@SuppressWarnings("unused")
 	private BasicDataSource source = null;
 
 	@Autowired
@@ -31,7 +31,7 @@ public class GenericDao<T> {
 	}
 
 	// function with no parameter query and return list
-	@SuppressWarnings("finally")
+	@SuppressWarnings({ "finally", "rawtypes" })
 	public List getData(String query) {
 		List list = null;
 		try {
@@ -45,7 +45,7 @@ public class GenericDao<T> {
 	}
 
 	// function with parameterized query and return list
-	@SuppressWarnings("finally")
+	@SuppressWarnings({ "finally", "rawtypes" })
 	public List getData(String query, Object[] params) {
 		List list = null;
 		try {
@@ -58,7 +58,7 @@ public class GenericDao<T> {
 		}
 	}
 
-	@SuppressWarnings("finally")
+	@SuppressWarnings({ "finally", "deprecation" })
 	public int getIntData(String query) {
 		int val = 0;
 		try {
@@ -124,6 +124,7 @@ public class GenericDao<T> {
 	 * @param transactionManager
 	 *            the transactionManager to set
 	 */
+	@SuppressWarnings("unused")
 	public void setTransactionManager(DataSourceTransactionManager transactionManager) {
 		TransactionDefinition def = new DefaultTransactionDefinition();
 		TransactionStatus status = transactionManager.getTransaction(def);
