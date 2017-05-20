@@ -44,7 +44,7 @@ public class UserController {
 		boolean flag = false;
 		flag = userService.insertUser(user);
 		if(flag){url ="post";
-		//set the session of user here
+		 //set the session
 		}
 		else {
 			url = "home";

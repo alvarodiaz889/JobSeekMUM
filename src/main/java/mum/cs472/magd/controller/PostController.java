@@ -48,5 +48,21 @@ public class PostController {
 			model.addAttribute("msg", "Invalid Username/Password");}
 		return url;
 	}
+	
+	@RequestMapping(value ="/addPost",params = {"postText!="})
+	public String addPost(HttpServletRequest request,Model model, @RequestParam(required=true)String postText){
+		
+		String userSessionId = "123123";
+		Post post = new Post();
+		post.setPostText(postText);
+		boolean flag =postService.insertPost(post, userSessionId);
+		if(flag){
+			model.addAttribute("msg", "post added successully");
+		}
+		else{
+			model.addAttribute("msg", "post not added ");
+		}
+		return "post";
+	}
 			
 }
