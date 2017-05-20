@@ -10,5 +10,6 @@ import org.springframework.stereotype.Service;
 public interface PostService {
 
 	List<Post> getPosts();
+	boolean insertPost(Post post,String userId);
 	
 }
