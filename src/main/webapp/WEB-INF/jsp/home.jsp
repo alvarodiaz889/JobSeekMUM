@@ -26,6 +26,11 @@
     <!-- Theme CSS -->
 
     <link href="<%=request.getContextPath() %>/resources/assets/css/creative.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="<%=request.getContextPath() %>/resources/assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath() %>/resources/assets/js/creative.js"></script>
+	<!-- AJAX Functions -->
+	<script type="text/javascript" src="<%=request.getContextPath() %>/resources/assets/js/ajax.js"></script> 
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -166,9 +171,4 @@
 	<h1>${msg }</h1>
 
 </body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
-	<script type="text/javascript" src="<%=request.getContextPath() %>/resources/assets/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath() %>/resources/assets/js/creative.js"></script>
-	<!-- AJAX Functions -->
-	 <script src="<%=request.getContextPath() %>/resources/js/ajax.js"></script> 
 </html>
