@@ -433,3 +433,6 @@ body {
 	text-align: center;
     color: red;
 }
+.hide {
+	display : none;
+}

@@ -3,18 +3,18 @@
 	<section class="bg-primary" id="posts">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
+                <div class="col-lg-8 col-lg-offset-2 text-center posts">
 	                <ul class="nav nav-tabs">
 					  <li role="presentation"><a href="#">Suggest a Job</a></li>
 					  <li role="presentation"><a href="#">Seeking Job</a></li>
 					  <li role="presentation"><a href="#">My Posts</a></li>
 					</ul>
-					<div class="panel panel-default">
+					<div class="post-panel panel panel-default">
 						<div class="panel-body" id="panelContent">
 						    Suggest a Job
 						</div>
 					</div>
-					<div class="panel panel-default">
+					<div class="post-panel panel panel-default">
 						<div class="panel-body" id="panelContent">
 						    <div class="form-group">
 	                			<div class="col-sm-6">
@@ -30,7 +30,7 @@
                 			</div>
 						</div>
 					</div>
-					<div class="panel panel-default">
+					<div class="post-panel  panel panel-default">
 						<div class="panel-body" id="panelContent">
 						    MyPosts
 						</div>
