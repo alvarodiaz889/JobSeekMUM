@@ -17,21 +17,27 @@
 					</div>
 					<div class="post-panel panel panel-default">
 						<div class="panel-body" id="panelContent">
-						    <div class="form-group">
+						   <div class="form-group">
 	                			<div class="col-sm-12">
-	                				<select class="form-control" id="myPostType">
-	                					<option value="JAVADEVELOPER" selected>Java Developer</option>
+	                				<select class="form-control  MyPostForm" id="myPostType"  >
+	                					<option value="" >Select type</option>
+	                					<option value="JAVADEVELOPER" >Java Developer</option>
 	                					<option value="NETDEVELOPER">.Net Developer</option>
 	                					<option value="WEBDEVELOPER">Web Developer</option>
 	                				</select>
 	                			</div>
 	                			<div class="col-sm-12">
-	                				<textarea id="myPostBody" class="form-control" required></textarea>
+	                				<input type="text" id="myPostTitle" class="form-control MyPostForm" placeholder="Title" >
+	                				<br>
 	                			</div>
 	                			<div class="col-sm-12">
-	                				<input type="submit" class="btn" value="Submit" id="myPostSubmit">
+	                				<textarea id="myPostBody" class="form-control MyPostForm"  placeholder="Text" ></textarea>
+	                			</div>
+	                			<div class="col-sm-12">
+	                				<input type="submit" class="btn" value="Submit" id="myPostSubmit" disabled="disabled">
 	                			</div>
                 			</div>
+
 						</div>
 					</div>
 					<div class="post-panel  panel panel-default">
