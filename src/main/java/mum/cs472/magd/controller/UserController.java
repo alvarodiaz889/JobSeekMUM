@@ -25,7 +25,8 @@ public class UserController {
 			@RequestParam("gender") String gender,
 			@RequestParam("email") String email,
 			@RequestParam("state") String state,
-			@RequestParam("birthYear") int birthYear){
+			@RequestParam("birthYear") int birthYear,
+			@RequestParam("street") String street){
 		
 		
 		int genderValue = 0;
@@ -40,6 +41,7 @@ public class UserController {
 		user.setState(state);
 		user.setEmail(email);
 		user.setPassword(password);
+		user.setStreet(street);
 		user.setZipCode(Integer.parseInt(zipCode));
 		boolean flag = false;
 		flag = userService.insertUser(user);

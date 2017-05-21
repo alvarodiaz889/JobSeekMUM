@@ -22,7 +22,7 @@ public class UserServiceImple implements UserService {
 		
 		boolean flag = false;
 		List<User> userList = new ArrayList<>();
-		String query = "SELECT EMAIL,PASSWORD FROM USER WHERE EMAIL=? AND PASSWORD =?";
+		String query = "SELECT EMAIL,PASSWORD FROM USERS WHERE EMAIL=? AND PASSWORD =?";
 		userList=dao.getData(query, new Object[]{user.getEmail(),user.getPassword()});
 		if(null!=userList && userList.size()>0){flag = true;}
 		
@@ -31,9 +31,11 @@ public class UserServiceImple implements UserService {
 	@Override
 	public boolean insertUser(User user) {
 		boolean flag = false;
-		String query ="INSERT INTO USER(USER_ID,FULLNAME,GENDER,BIRTHYEAR,STATE,CITY,EMAIL,PASSWORD,DATE_CREATED,DATE_UPDATED)  "+
-					  "VALUES(SEQ_USER_USERID,?,?,?,?,?,?,?,SYSDATE,SYSDATE) " ;
-		Object[] params = new Object[]{user.getFullName(),user.getGender(),user.getBirthYear(),user.getState(),user.getCity(),user.getEmail(),user.getEmail()};
+		String query ="INSERT INTO USERS(FULLNAME,GENDER,BIRTHYEAR,STATE,STREET,CITY,EMAIL,ZIPCODE,PASSWORD,DATECREATED,DATEUPDATED)  "+
+					  "VALUES(?,?,?,?,?,?,?,?,?,CURDATE(),CURDATE()) " ;
+		Object[] params =
+	new Object[]{user.getFullName(),user.getGender(),user.getBirthYear(),user.getState(),user.getStreet(),
+				user.getCity(),user.getEmail(),user.getZipCode(),user.getPassword()};
 		flag = dao.update(query, params);
 		return flag;
 	}

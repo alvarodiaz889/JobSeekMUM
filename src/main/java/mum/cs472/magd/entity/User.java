@@ -15,18 +15,20 @@ public final class User implements Serializable {
 	private int zipCode;
 	private int birthYear;
 	private String email;
+	private String street;
 	private String password;
 	private Date dateCreated;
 	private Date dateUpdated;
 	
 	public User(){}
 	
-	public User(int userId, String fullName, int gender, String state, String city, int zipCode, int birthYear,
+	public User(int userId, String fullName, int gender, String state, String city,String street, int zipCode, int birthYear,
 			String email, String password, Date dateCreated, Date dateUpdated) {
 		super();
 		this.userId = userId;
 		this.fullName = fullName;
 		this.gender = gender;
+		this.street = street;
 		this.state = state;
 		this.city = city;
 		this.zipCode = zipCode;
@@ -123,6 +125,14 @@ public final class User implements Serializable {
 
 	public void setDateUpdated(Date dateUpdated) {
 		this.dateUpdated = dateUpdated;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
 	}
 
 	@Override
