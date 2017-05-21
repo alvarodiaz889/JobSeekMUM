@@ -17,8 +17,8 @@ $(function(){
 			"type":"POST",
 			"data": { 
 				"user_id": userId,
-				"type": type,
-				"body": body 
+				"postTYpe": type,
+				"postText": body 
 			},
 		}).done(myPostCleanMsg)
 		  .fail(showError);
