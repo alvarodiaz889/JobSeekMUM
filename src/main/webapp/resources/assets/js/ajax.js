@@ -39,6 +39,14 @@ $(function(){
 		  .fail(showError);
 	}
 	
+	function getPosts() {		
+		$.get("/JobSeekMum/getPosts").done(retrievePosts).fail(showError);
+	}
+	
+	function retrievePosts(data) {
+		
+	}
+	
 	function myPostCleanMsg(){
 		//Add message Todo
 		$("#messageSpace").append(successMsg);

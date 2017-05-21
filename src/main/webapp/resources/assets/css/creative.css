@@ -456,3 +456,12 @@ body {
 .grey-txt {
     color: #ccc;
 }
+.likes img {
+	width: 30px;
+}
+.comment {
+	background-color: #eee; 
+}
+.bold{
+	font-weight: bold;
+}

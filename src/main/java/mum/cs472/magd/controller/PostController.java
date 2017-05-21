@@ -1,7 +1,8 @@
 package mum.cs472.magd.controller;
 
+import java.util.List;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
-
 
 import mum.cs472.magd.entity.Post;
 import mum.cs472.magd.service.GlobalService;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PostController {
@@ -33,6 +35,42 @@ public class PostController {
 		String userId = (String)request.getSession(true).getAttribute("userId");
 		boolean flag = false;
 		try{ flag =postService.insertPost(post,userId);
+		if(flag){
+			model.addAttribute("msg", "post added successully");
+		}
+		else{
+			model.addAttribute("msg", "post not added ");
+		}
+		}catch(Exception ex){
+			ex.printStackTrace();
+			model.addAttribute("msg", "post not added ");
+		}
+		return "home";
+	}
+	
+	@RequestMapping(value ="/getPosts")
+	public String getPosts(HttpServletRequest request,Model model){	
+		
+		List<Post> posts = new ArrayList<>();
+		try{ 
+			posts =postService.getPosts();		
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		return "home";
+	}
+	
+	
+	@RequestMapping(value ="/suggestPost")
+	public String suggestPost(HttpServletRequest request,Model model, 
+			@RequestParam("postId") String postId,
+			@RequestParam("toUserId") String toUserId){
+		
+		
+		String userId = (String)request.getSession(true).getAttribute("userId");
+		boolean flag = false;
+		try{ flag =postService.suggestPost(userId, postId, toUserId);
 		if(flag){
 			model.addAttribute("msg", "post added successully");
 		}

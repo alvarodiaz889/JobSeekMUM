@@ -27,7 +27,7 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public boolean insertPost(Post post,String userId) {
 		String query = "INSERT INTO POSTS(USERID,POST,POSTTYPE,POSTTITLE,DATECREATED,DATEUPDATED) "+
-						"VALUES(?,?,?,SYSDATE(),SYSDATE() ) ";
+						"VALUES(?,?,?,?,SYSDATE(),SYSDATE() ) ";
 		Object[] params = new Object[]{userId,post.getPostText(),post.getPostType(), post.getPostTitle()};
 
 		boolean flag = dao.update(query, params);
@@ -37,6 +37,15 @@ public class PostServiceImpl implements PostService {
 	public boolean deletePost(Post post) {
 		String query ="DELETE FROM POSTS WHERE POSTID = ? ";
 		boolean flag = dao.update(query, new Object[]{post.getPostId()} );
+		return flag;
+	}
+	@Override
+	public boolean suggestPost(String userId, String postId, String toUserId) {
+		String query = "INSERT INTO SUGGESTJOB(POSTID,USERID,TOUSERID,DATECREATED) "+
+				"VALUES(?,?,?,SYSDATE()) ";
+		Object[] params = new Object[]{postId, userId,toUserId};
+		
+		boolean flag = dao.update(query, params);
 		return flag;
 	}
 
