@@ -26,7 +26,7 @@ public class UserController {
 		flag = userService.insertUser(user);
 		String userId = userService.getUserId(user);
 		if(flag){
-			url ="post";
+			url ="home";
 			HttpSession session = request.getSession(false);
 			session = request.getSession(true);
 			session.setAttribute("user", user.getEmail());
