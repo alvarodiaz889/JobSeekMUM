@@ -27,7 +27,7 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public boolean insertPost(Post post,String userId) {
 		String query = "INSERT INTO POSTS(USERID,POST,POSTTYPE,POSTTITLE,DATECREATED,DATEUPDATED) "+
-						"VALUES(?,?,?,SYSDATE(),SYSDATE() ) ";
+						"VALUES(?,?,?,?,SYSDATE(),SYSDATE() ) ";
 		Object[] params = new Object[]{userId,post.getPostText(),post.getPostType(), post.getPostTitle()};
 
 		boolean flag = dao.update(query, params);
