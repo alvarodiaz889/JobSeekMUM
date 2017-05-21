@@ -10,6 +10,7 @@ public final class Post implements Serializable {
 	
 	private String postText;
 	private String postType;
+	private String postTitle;
 	private Date dateCreated;
 	private Date dateUpdated;
 	
@@ -37,6 +38,14 @@ public final class Post implements Serializable {
 
 	public void setPostType(String postType) {
 		this.postType = postType;
+	}
+
+	public String getPostTitle() {
+		return postTitle;
+	}
+
+	public void setPostTitle(String postTitle) {
+		this.postTitle = postTitle;
 	}
 
 	public Date getDateCreated() {
