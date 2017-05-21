@@ -49,12 +49,14 @@ public class PostController {
 		return url;
 	}
 	
-	@RequestMapping(value ="/addPost",params = {"postText!="})
-	public String addPost(HttpServletRequest request,Model model, @RequestParam(required=true)String postText){
-		
+	@RequestMapping(value ="/addPost",params = {"myPostType!=","myPostBody!="})
+	public String addPost(HttpServletRequest request,Model model, @RequestParam(required=true)String myPostType,
+			@RequestParam(required=true)String myPostBody){
+		System.out.println("addPost");
 		String userSessionId = "123123";
 		Post post = new Post();
-		post.setPostText(postText);
+		post.setPostType(myPostType);
+		post.setPostText(myPostBody);
 		boolean flag =postService.insertPost(post, userSessionId);
 		if(flag){
 			model.addAttribute("msg", "post added successully");

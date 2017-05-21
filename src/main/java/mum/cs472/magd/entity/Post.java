@@ -9,6 +9,7 @@ public final class Post implements Serializable {
 	private Integer postId;
 	private User userId;
 	private String postText;
+	private String postType;
 	private Date dateCreated;
 	private Date dateUpdated;
 	
@@ -45,6 +46,14 @@ public final class Post implements Serializable {
 
 	public void setPostText(String postText) {
 		this.postText = postText;
+	}
+	
+	public String getPostType() {
+		return postType;
+	}
+
+	public void setPostType(String postType) {
+		this.postType = postType;
 	}
 
 	public Date getDateCreated() {
