@@ -11,9 +11,9 @@
 	<context:component-scan base-package="mum.cs472" />
 	<bean id="basicDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 	    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-	    <property name="url" value="jdbc:mysql://localhost:3306/jobseek" />
-	    <property name="username" value="root" />
-	    <property name="password" value="" />
+	    <property name="url" value="jdbc:mysql://10.10.15.85:3306/jobseeker" />
+	    <property name="username" value="jobseeker" />
+	    <property name="password" value="jobseeker" />
 	  </bean>
 
 	<!-- jdbcTemplate uses dataSource --> 
