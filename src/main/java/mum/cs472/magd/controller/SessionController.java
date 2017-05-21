@@ -33,7 +33,8 @@ public class SessionController {
 	@SuppressWarnings("finally")
 	@RequestMapping(value="post")
 	public String verifyAdminLogin(HttpServletRequest request, Model model,User user){
-		String message = "",url = "";
+		String message = "";
+		String url = "home";
 		try{
 			if(glbSrv.isUserSessionExist(request)){
 				url = "home";
@@ -50,7 +51,7 @@ public class SessionController {
 					List<Post> posts = new ArrayList<>();
 					posts = postService.getPosts();
 					model.addAttribute("posts", posts);
-					url = "post";
+					url = "home";
 				}else{
 					model.addAttribute("msg", "Invalid parameters");
 					
