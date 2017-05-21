@@ -26,6 +26,9 @@ a {
   transition: all 0.35s;
   color: #F05F40;
 }
+img{
+	max-width: 100%;
+}
 a:hover,
 a:focus {
   color: #eb3812;

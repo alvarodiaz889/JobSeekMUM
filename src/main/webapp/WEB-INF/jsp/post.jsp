@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <link href="<%=request.getContextPath() %>/resources/assets/css/post.css" rel="stylesheet">
 	<section class="bg-primary" id="posts">
         <div class="container">
             <div class="row">
@@ -13,7 +14,14 @@
 						
 					</div>
 					<div class="post-panel panel panel-default" id="panel2">
-						
+						<div class="row">
+							<div class="col-sm-2">
+								<img class="img-circle" alt="user image" src="<%=request.getContextPath() %>/resources/images/user.jpg">
+								<p>User Name</p>
+								<br>
+							</div>
+							<div class="col-sm-10"></div>
+						</div>
 					</div>
 					<div class="post-panel panel panel-default">
 						<div class="panel-body" id="panelContent">

@@ -35,9 +35,6 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
-	<!-- AJAX Functions -->
-	 <script src="<%=request.getContextPath() %>/resources/js/ajax.js"></script> 
 </head>
 <body id="page-top">
 	<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
@@ -124,15 +121,10 @@
                 			<div class="col-sm-6">
                 				<input type="text" name="city" placeholder="City" class="form-control" required>
                 			</div>
-                		</div>
-                		
+                		</div>                		
                 		<div class="form-group">
-                			<div class="col-sm-6">
-                				<input type="text" name="street" placeholder="Street" class="form-control" required>
-                			</div>
-                			
-                		</div>
-                		
+               				<input type="text" name="street" placeholder="Street" class="form-control" required>  
+                		</div>                		
                 		<div class="form-group">
                 			<div class="col-sm-6">
                 				<input type="number" name="zipCode" placeholder="Zip Code" class="form-control" required>
@@ -175,4 +167,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/resources/assets/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/resources/assets/js/creative.js"></script>
+	<!-- AJAX Functions -->
+	 <script src="<%=request.getContextPath() %>/resources/js/ajax.js"></script> 
 </html>
