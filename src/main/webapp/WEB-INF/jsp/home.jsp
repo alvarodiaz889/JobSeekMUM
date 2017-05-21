@@ -1,21 +1,3 @@
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Gist
- @danialSaeed92
- Sign out
- Watch 3
-  Star 0
-  Fork 0 danialSaeed92/JobSeekMum
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Pulse  Graphs  Settings
-Branch: master Find file Copy pathJobSeekMum/src/main/webapp/WEB-INF/jsp/home.jsp
-55f8f35  23 minutes ago
-@MafiM MafiM not able to find resources
-2 contributors @MafiM @danialSaeed92
-RawBlameHistory     
-156 lines (142 sloc)  6.25 KB
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -39,19 +21,13 @@ RawBlameHistory
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
     <!-- Plugin CSS -->
-<<<<<<< HEAD
-    <link href="src/main/resources/assets/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
-    <!-- Theme CSS -->
-
-    <link href="src/main/resources/assets/css/creative.css" rel="stylesheet">
-=======
     <link href="<%=request.getContextPath() %>/resources/assets/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
     <!-- Theme CSS -->
 
     <link href="<%=request.getContextPath() %>/resources/assets/css/creative.css" rel="stylesheet">
->>>>>>> origin/master
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -100,9 +76,6 @@ RawBlameHistory
                     </button>
                 </div>
                 <div class="modal-body">
-<<<<<<< HEAD
-                ...
-=======
                 	<form action="<%=request.getContextPath()%>/post.do">
                 		<div class="form-group">
                 			<input type="email" id="loginEmail" class="form-control" name="email" placeholder="Enter Email Here.." required>
@@ -114,7 +87,6 @@ RawBlameHistory
                 			<input type="submit" class="btn" value="Log In">
                 		</div>
 					</form>
->>>>>>> origin/master
                 </div>
             </div>
         </div>
@@ -190,49 +162,6 @@ RawBlameHistory
 	
 	<h1>${msg }</h1>
 
-	<form action="<%=request.getContextPath()%>/signUp.do" method="post">
-		<table>
-			<tr>
-				<td><label>Full Name</label></td>
-				<td><input type="text" name="fullName" /></td>
-			</tr>
-			<tr>
-				<td><label>Gender</label></td>
-				<td><select name="gender"><option value="f">Female</option>
-						<option value="m">Male</option></select></td>
-			</tr>
-			<tr>
-				<td><label>BirthYear</label></td>
-				<td><input type="text" name="birthYear" /></td>
-			</tr>
-			<tr>
-				<td><label>State</label></td>
-				<td><input type="text" name="state" /></td>
-			</tr>
-			<tr>
-				<td><label>Street</label></td>
-				<td><input type="text" name="street" /></td>
-			</tr>
-			<tr>
-				<td><label>City</label></td>
-				<td><input type="text" name="city" /></td>
-			</tr>
-			<tr>
-				<td><label>Zip Code</label></td>
-				<td><input type="number" name="zipCode" /></td>
-			</tr>
-			<tr>
-				<td><label>Email</label></td>
-				<td><input type="email" name="email" /></td>
-			</tr>
-			<tr>
-				<td><label>Password</label></td>
-				<td><input type="password" name="password" /></td>
-			</tr>
-		</table>
-		<input type="submit" value="signUp" />
-	</form>q
->>>>>>> 783a28154b7d31a484c6c6d78611acb4ecf42117
 </body>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/assets/js/bootstrap.min.js"></script>
 </html>
