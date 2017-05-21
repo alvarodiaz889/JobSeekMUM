@@ -10,7 +10,9 @@
 					  <li role="presentation"><a href="#">My Posts</a></li>
 					</ul>
 					<div class="post-panel panel panel-default" id="panel1">
+						<div id="mySugPosts">
 						
+						</div>
 					</div>
 					<div class="post-panel panel panel-default" id="panel2">
 						<div class="row">
