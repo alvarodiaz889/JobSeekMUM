@@ -3,6 +3,8 @@
  */
 
 $(function(){
+	
+	
 	$("#myPostSubmit").click(function(){
 		createMyPost();
 	});
@@ -17,7 +19,7 @@ $(function(){
 			"type":"POST",
 			"data": { 
 				"user_id": userId,
-				"postTYpe": type,
+				"postType": type,
 				"postText": body 
 			},
 		}).done(myPostCleanMsg)
