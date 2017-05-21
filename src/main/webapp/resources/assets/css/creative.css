@@ -436,3 +436,8 @@ body {
 .hide {
 	display : none;
 }
+.posts >li>a {
+    text-decoration: none;
+    background-color: #eee;
+    border-color: #eee #eee #ddd;
+}

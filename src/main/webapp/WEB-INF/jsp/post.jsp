@@ -5,14 +5,15 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center posts">
 	                <ul class="nav nav-tabs">
-					  <li role="presentation"><a href="#">Suggest a Job</a></li>
-					  <li role="presentation"><a href="#">Seeking Job</a></li>
+					  <li role="presentation"><a href="#">Suggested Jobs</a></li>
+					  <li role="presentation"><a href="#">Job Posts</a></li>
 					  <li role="presentation"><a href="#">My Posts</a></li>
 					</ul>
-					<div class="post-panel panel panel-default">
-						<div class="panel-body" id="panelContent">
-						    Suggest a Job
-						</div>
+					<div class="post-panel panel panel-default" id="panel1">
+						
+					</div>
+					<div class="post-panel panel panel-default" id="panel2">
+						
 					</div>
 					<div class="post-panel panel panel-default">
 						<div class="panel-body" id="panelContent">
