@@ -11,7 +11,6 @@
     <meta name="description" content="">
     <meta name="author" content="Mafi, Alvaro, Danyal, German">
 
-
     <!-- Bootstrap Core CSS -->
     <link href="<%=request.getContextPath() %>/resources/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -36,6 +35,9 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+	<!-- AJAX Functions -->
+	 <script src="<%=request.getContextPath() %>/resources/js/ajax.js"></script> 
 </head>
 <body id="page-top">
 	<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
@@ -75,7 +77,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                	<form action="<%=request.getContextPath()%>/post.do">
+                	<form action="<%=request.getContextPath()%>/post.do" method ="post">
                 		<div class="form-group">
                 			<input type="email" id="loginEmail" class="form-control" name="email" placeholder="Enter Email Here.." required>
                 		</div>
@@ -107,8 +109,8 @@
                 		<div class="form-group">
                 			<div class="col-sm-6">
                 				<select class="form-control" name="gender">
-                					<option value="f" selected>Female</option>
-                					<option value="m">Male</option>
+                					<option value="0" selected>Female</option>
+                					<option value="1">Male</option>
                 				</select>
                 			</div>
                 			<div class="col-sm-6">
@@ -123,6 +125,14 @@
                 				<input type="text" name="city" placeholder="City" class="form-control" required>
                 			</div>
                 		</div>
+                		
+                		<div class="form-group">
+                			<div class="col-sm-6">
+                				<input type="text" name="street" placeholder="Street" class="form-control" required>
+                			</div>
+                			
+                		</div>
+                		
                 		<div class="form-group">
                 			<div class="col-sm-6">
                 				<input type="number" name="zipCode" placeholder="Zip Code" class="form-control" required>

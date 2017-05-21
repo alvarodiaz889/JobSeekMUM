@@ -7,13 +7,13 @@ public final class User implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private int userId;
+	private String userId;
 	private String fullName;
-	private int gender;
+	private String gender;
 	private String state;
 	private String city;
-	private int zipCode;
-	private int birthYear;
+	private String zipCode;
+	private String birthYear;
 	private String email;
 	private String street;
 	private String password;
@@ -22,7 +22,7 @@ public final class User implements Serializable {
 	
 	public User(){}
 	
-	public User(int userId, String fullName, int gender, String state, String city,String street, int zipCode, int birthYear,
+	public User(String userId, String fullName, String gender, String state, String city,String street, String zipCode, String birthYear,
 			String email, String password, Date dateCreated, Date dateUpdated) {
 		super();
 		this.userId = userId;
@@ -39,11 +39,11 @@ public final class User implements Serializable {
 		this.dateUpdated = dateUpdated;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
@@ -55,11 +55,11 @@ public final class User implements Serializable {
 		this.fullName = fullName;
 	}
 
-	public int getGender() {
+	public String getGender() {
 		return gender;
 	}
 
-	public void setGender(int gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
@@ -79,19 +79,19 @@ public final class User implements Serializable {
 		this.city = city;
 	}
 
-	public int getZipCode() {
+	public String getZipCode() {
 		return zipCode;
 	}
 
-	public void setZipCode(int zipCode) {
+	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
 
-	public int getBirthYear() {
+	public String getBirthYear() {
 		return birthYear;
 	}
 
-	public void setBirthYear(int birthYear) {
+	public void setBirthYear(String birthYear) {
 		this.birthYear = birthYear;
 	}
 
@@ -135,21 +135,24 @@ public final class User implements Serializable {
 		this.street = street;
 	}
 
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + birthYear;
+		result = prime * result + ((birthYear == null) ? 0 : birthYear.hashCode());
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
 		result = prime * result + ((dateUpdated == null) ? 0 : dateUpdated.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((fullName == null) ? 0 : fullName.hashCode());
-		result = prime * result + gender;
+		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
-		result = prime * result + userId;
-		result = prime * result + zipCode;
+		result = prime * result + ((street == null) ? 0 : street.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		result = prime * result + ((zipCode == null) ? 0 : zipCode.hashCode());
 		return result;
 	}
 
@@ -162,7 +165,10 @@ public final class User implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (birthYear != other.birthYear)
+		if (birthYear == null) {
+			if (other.birthYear != null)
+				return false;
+		} else if (!birthYear.equals(other.birthYear))
 			return false;
 		if (city == null) {
 			if (other.city != null)
@@ -189,7 +195,10 @@ public final class User implements Serializable {
 				return false;
 		} else if (!fullName.equals(other.fullName))
 			return false;
-		if (gender != other.gender)
+		if (gender == null) {
+			if (other.gender != null)
+				return false;
+		} else if (!gender.equals(other.gender))
 			return false;
 		if (password == null) {
 			if (other.password != null)
@@ -201,9 +210,20 @@ public final class User implements Serializable {
 				return false;
 		} else if (!state.equals(other.state))
 			return false;
-		if (userId != other.userId)
+		if (street == null) {
+			if (other.street != null)
+				return false;
+		} else if (!street.equals(other.street))
 			return false;
-		if (zipCode != other.zipCode)
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
+		if (zipCode == null) {
+			if (other.zipCode != null)
+				return false;
+		} else if (!zipCode.equals(other.zipCode))
 			return false;
 		return true;
 	}

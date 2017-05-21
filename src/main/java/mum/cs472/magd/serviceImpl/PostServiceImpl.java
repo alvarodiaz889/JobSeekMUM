@@ -5,7 +5,6 @@ import java.util.List;
 
 import mum.cs472.magd.dao.GenericDao;
 import mum.cs472.magd.entity.Post;
-
 import mum.cs472.magd.service.PostService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +26,17 @@ public class PostServiceImpl implements PostService {
 	}
 	@Override
 	public boolean insertPost(Post post,String userId) {
-		String query = "INSERT INTO POSTS(POSTID,USERID,POST,DATECREATED,DATEUPDATED) "+
-						"VALUES(SEQ_POSTS_POSTID,?,?,CURDATE(),CURDATE() ";
-		Object[] params = new Object[]{userId,post.getPostText()};
+		String query = "INSERT INTO POSTS(USERID,POST,POSTTYPE,DATECREATED,DATEUPDATED) "+
+						"VALUES(?,?,?,CURDATE(),CURDATE() ) ";
+		Object[] params = new Object[]{userId,post.getPostText(),post.getPostType()};
+
 		boolean flag = dao.update(query, params);
+		return flag;
+	}
+	@Override
+	public boolean deletePost(Post post) {
+		String query ="DELETE FROM POSTS WHERE POSTID = ? ";
+		boolean flag = dao.update(query, new Object[]{post.getPostId()} );
 		return flag;
 	}
 

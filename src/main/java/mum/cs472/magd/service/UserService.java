@@ -9,4 +9,5 @@ public interface UserService {
 
 	public boolean isValid(User user);
 	public boolean insertUser(User user);
+	public String getUserId(User user);
 }

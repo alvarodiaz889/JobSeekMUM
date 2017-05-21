@@ -11,5 +11,6 @@ public interface PostService {
 
 	List<Post> getPosts();
 	boolean insertPost(Post post,String userId);
+	boolean deletePost(Post post);
 	
 }
