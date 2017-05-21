@@ -30,6 +30,7 @@ public class PostServiceImpl implements PostService {
 		String query = "INSERT INTO POSTS(USERID,POST,POSTTYPE,DATECREATED,DATEUPDATED) "+
 						"VALUES(?,?,?,CURDATE(),CURDATE() ) ";
 		Object[] params = new Object[]{userId,post.getPostText(),post.getPostType()};
+
 		boolean flag = dao.update(query, params);
 		return flag;
 	}

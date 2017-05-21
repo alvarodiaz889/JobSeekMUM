@@ -47,6 +47,7 @@ public class GenericDao<T> {
 	// function with parameterized query and return list
 	@SuppressWarnings({ "finally", "rawtypes" })
 	public List getData(String query, Object[] params) {
+		System.out.println("Query: " + query);
 		List list = null;
 		try {
 			list = this.jdbcTemplate.queryForList(query, params);
