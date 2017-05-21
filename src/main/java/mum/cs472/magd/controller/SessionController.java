@@ -66,7 +66,7 @@ public class SessionController {
 			model.addAttribute("msg",message);
 			ex.printStackTrace();
 		}finally{
-			return url;
+			return "home";
 		}
 	}
 	

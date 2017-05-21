@@ -16,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.google.gson.Gson;
+
 @Controller
 public class PostController {
 
@@ -73,14 +75,16 @@ public class PostController {
 	}
 	
 	@RequestMapping(value ="/listSuggestPost")
-	public List<Post> listSuggestPost(HttpServletRequest request,Model model){
+	public String listSuggestPost(HttpServletRequest request,Model model){
 		
 		
 		String userId = (String)request.getSession(true).getAttribute("userId");
 		boolean flag = false;
 		List<Post> post = postService.listSuggestPost(userId);
-		return null;
-		//return "home";
+		String json =  "" ; 
+		json =new Gson().toJson(post);
+		return json;
+
 	}
 	
 	@RequestMapping(value="/deletePost")
