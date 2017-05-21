@@ -22,6 +22,7 @@ public class UserController {
 		
 		String url="";
 		boolean flag = false;
+		try{
 		flag = userService.insertUser(user);
 		String userId = userService.getUserId(user);
 		if(flag){
@@ -36,6 +37,10 @@ public class UserController {
 			url = "home";
 			model.addAttribute("msg", "Issue occured while inserting the user");
 		}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
 		return url;
 	}
 }

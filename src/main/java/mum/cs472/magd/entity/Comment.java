@@ -10,7 +10,6 @@ public final class Comment implements Serializable {
 	
 	
 	private Integer commentId;
-
 	private String commentText;
 	private Date dateCreated;
 	private Date dateUpdated;
