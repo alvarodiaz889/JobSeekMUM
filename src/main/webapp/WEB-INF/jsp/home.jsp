@@ -170,5 +170,5 @@
 	<script type="text/javascript" src="<%=request.getContextPath() %>/resources/assets/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/resources/assets/js/creative.js"></script>
 	<!-- AJAX Functions -->
-	 <script src="<%=request.getContextPath() %>/resources/js/ajax.js"></script> 
+	 <script src="<%=request.getContextPath() %>/resources/assets/js/ajax.js"></script> 
 </html>
