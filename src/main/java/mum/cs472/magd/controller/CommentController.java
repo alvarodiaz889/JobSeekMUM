@@ -1,24 +1,56 @@
 package mum.cs472.magd.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
+import mum.cs472.magd.entity.Comment;
 import mum.cs472.magd.service.CommentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CommentController {
 
 	@Autowired
-	private CommentService commentSerivce;
+	private CommentService commentService;
 	
-	@RequestMapping("/HomePage")
-	public String myHomePage(HttpServletRequest request, Model model){
+	@RequestMapping("/viewComment")
+	public String viewComments(HttpServletRequest request, Model model, @RequestParam("postId") String postId){
 		
+		List<Comment> comments = new ArrayList<>();
+		try{
+		comments = commentService.viewComments(postId);
+		if(null!=comments&& comments.size()>0){
+			model.addAttribute("comments", comments);
+		}
+		else{
+			model.addAttribute("msg", "No comments found !");
+		}
+		}catch(Exception e){e.printStackTrace();}
+		return "home";
+	}
+	
+	@RequestMapping("/addComment")
+	public String addComment(HttpServletRequest request, Model model, 
+			Comment comment,@RequestParam("postId") String postId){
 		
-		return "home.jsp";
+		boolean flag  = false;
+		String userId = (String)request.getSession(true).getAttribute("userId");
+		try{
+		flag = commentService.addComment(comment, postId, userId);
+		if(flag){
+			model.addAttribute("msg", "Comment Added Successfully");
+		}
+		else{
+			model.addAttribute("msg", "Error adding Comment");
+		}
+		}catch(Exception ex){ex.printStackTrace();}
+		return "home";
 	}
 }

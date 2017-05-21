@@ -37,7 +37,7 @@ public class SessionController {
 		try{
 			if(glbSrv.isUserSessionExist(request)){
 				url = "home";
-			}else
+			}
 			if(user.getEmail()!=null && !user.getEmail().isEmpty() && user.getPassword()!=null && !user.getPassword().isEmpty()){
 				boolean flag = adminSvc.isValid(user);
 				String userId = adminSvc.getUserId(user);
@@ -52,7 +52,8 @@ public class SessionController {
 					model.addAttribute("posts", posts);
 					url = "post";
 				}else{
-					errMsg = "Invalid user/password";
+					model.addAttribute("msg", "Invalid parameters");
+					
 					url = "home";
 				}
 			}else{
@@ -61,7 +62,7 @@ public class SessionController {
 			}
 		}catch(Exception ex){
 			message = "Something went wrong ;(";
-			model.addAttribute("message",message);
+			model.addAttribute("msg",message);
 			ex.printStackTrace();
 		}finally{
 			return url;
@@ -79,6 +80,7 @@ public class SessionController {
 				session.removeAttribute("isAdmin");
 				session.invalidate();
 				errMsg = "User signedout successfully";
+				model.addAttribute("msg", errMsg);
 				url = "home";
 			}
 		}catch(Exception ex){
