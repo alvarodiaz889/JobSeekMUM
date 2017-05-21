@@ -39,6 +39,15 @@ public class PostServiceImpl implements PostService {
 		boolean flag = dao.update(query, new Object[]{post.getPostId()} );
 		return flag;
 	}
+	@Override
+	public boolean suggestPost(String userId, String postId, String toUserId) {
+		String query = "INSERT INTO SUGGESTJOB(POSTID,USERID,TOUSERID,DATECREATED) "+
+				"VALUES(?,?,?,SYSDATE()) ";
+		Object[] params = new Object[]{postId, userId,toUserId};
+		
+		boolean flag = dao.update(query, params);
+		return flag;
+	}
 
 	
 
