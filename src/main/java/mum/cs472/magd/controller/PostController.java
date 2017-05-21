@@ -1,13 +1,18 @@
 package mum.cs472.magd.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
+
 
 import mum.cs472.magd.entity.Post;
 import mum.cs472.magd.service.GlobalService;
 import mum.cs472.magd.service.PostService;
 import mum.cs472.magd.service.UserService;
+
+import javax.servlet.http.HttpServletResponse;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.gson.Gson;
+
 
 @Controller
 public class PostController {
@@ -87,15 +93,15 @@ public class PostController {
 	}
 	
 	@RequestMapping(value ="/listSuggestPost")
-	public String listSuggestPost(HttpServletRequest request,Model model){
+	public void listSuggestPost(HttpServletRequest request,Model model,HttpServletResponse response) throws IOException{
 		
 		
 		String userId = (String)request.getSession(true).getAttribute("userId");
 		boolean flag = false;
-		List<Post> post = postService.listSuggestPost(userId);
+		List post = postService.listSuggestPost(userId);
 		String json =  "" ; 
 		json =new Gson().toJson(post);
-		return json;
+		response.getWriter().write("{ \"data\":"   + json + " }"); 
 
 	}
 	

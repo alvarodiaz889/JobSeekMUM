@@ -13,6 +13,6 @@ public interface PostService {
 	boolean insertPost(Post post,String userId);
 	boolean deletePost(Post post);
 	boolean suggestPost(String userId, String postId, String toUserId);
-	List<Post> listSuggestPost(String userId);
+	List listSuggestPost(String userId);
 	
 }

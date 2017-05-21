@@ -7,6 +7,11 @@ $(function(){
 	var successMsg = "<div class='alert alert-success'><strong>Success!</strong> Indicates a successful or positive action.</div>";
 	var errorMsg = "<div class='alert alert-warning'> <strong>Warning!</strong> Indicates a warning that might need attention.</div>";
 	
+	listSuggestedPosts();
+	
+	/*
+	 * MyPost
+	 */
 	$("#myPostSubmit").click(function(){
 		createMyPost();
 	});
@@ -57,6 +62,21 @@ $(function(){
 		 $("#myPostTitle").val('');
 		 $("#myPostSubmit").attr('disabled','disabled');
 		alert("Insert ok");
+	}
+	
+	/*
+	 * SuggestedPosts
+	 */
+	function listSuggestedPosts(){
+	
+		$.ajax("/JobSeekMum/listSuggestPost",{
+			"type":"POST"
+		}).done(showSuggestedPosts)
+		  .fail(showError);
+	}
+	
+	function showSuggestedPosts(data){
+		console.log(data);
 	}
 	
 	function showError(){
