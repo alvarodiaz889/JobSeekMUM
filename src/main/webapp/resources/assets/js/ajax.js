@@ -11,7 +11,7 @@ $(function(){
 		createMyPost();
 	});
 	
-	$(".MyPostForm").change(function(){
+	$(".MyPostForm").keydown(function(){
 		let type = $("#myPostType").val();
 		let body = $("#myPostBody").val();
 		let title = $("#myPostTitle").val();

@@ -41,6 +41,6 @@ public class UserController {
 			ex.printStackTrace();
 		}
 		
-		return url;
+		return "home";
 	}
 }

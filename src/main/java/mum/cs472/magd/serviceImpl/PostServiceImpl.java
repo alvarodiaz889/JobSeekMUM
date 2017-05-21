@@ -48,6 +48,13 @@ public class PostServiceImpl implements PostService {
 		boolean flag = dao.update(query, params);
 		return flag;
 	}
+	@Override
+	public List<Post> listSuggestPost(String userId) {
+		List<Post> posts = new  ArrayList<>();
+		String query = "SELECT * FROM SUGGESTPOST WHERE touserid = ? " ;
+		posts = dao.getData(query, new Object[]{userId});
+		return posts;
+	}
 
 	
 
