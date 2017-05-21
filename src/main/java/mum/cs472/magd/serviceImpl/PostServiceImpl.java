@@ -5,7 +5,6 @@ import java.util.List;
 
 import mum.cs472.magd.dao.GenericDao;
 import mum.cs472.magd.entity.Post;
-
 import mum.cs472.magd.service.PostService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +31,12 @@ public class PostServiceImpl implements PostService {
 		Object[] params = new Object[]{userId,post.getPostText(),post.getPostType()};
 
 		boolean flag = dao.update(query, params);
+		return flag;
+	}
+	@Override
+	public boolean deletePost(Post post) {
+		String query ="DELETE FROM POSTS WHERE POSTID = ? ";
+		boolean flag = dao.update(query, new Object[]{post.getPostId()} );
 		return flag;
 	}
 

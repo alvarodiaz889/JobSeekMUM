@@ -31,13 +31,34 @@ public class PostController {
 		
 		
 		String userId = (String)request.getSession(true).getAttribute("userId");
-		boolean flag =postService.insertPost(post,userId);
+		boolean flag = false;
+		try{ flag =postService.insertPost(post,userId);
 		if(flag){
 			model.addAttribute("msg", "post added successully");
 		}
 		else{
 			model.addAttribute("msg", "post not added ");
 		}
+		}catch(Exception ex){
+			ex.printStackTrace();
+			model.addAttribute("msg", "post not added ");
+		}
+		return "home";
+	}
+	
+	@RequestMapping(value="/deletePost")
+	public String deletePost(HttpServletRequest request, Model model, Post post){
+		
+		boolean flag = false;
+		try{
+			flag = postService.deletePost(post);
+			if(flag){
+				model.addAttribute("msg", "Post deleted Succesfully");
+			}
+			else{
+				model.addAttribute("msg", "Error deleting post");
+			}
+		}catch(Exception ex){}
 		return "home";
 	}
 			
