@@ -9,7 +9,8 @@ body {
   width: 100%;
 }
 body {
-  font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
+  #font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 hr {
   border-color: #F05F40;
@@ -416,4 +417,19 @@ img::-moz-selection {
 }
 body {
   webkit-tap-highlight-color: #222222;
+}
+.modal-content {
+	background-color: #F05F40;
+}
+.form-group>div:first-child {
+    padding-left: 0;
+    margin-bottom: 15px;
+}
+.form-group>div:last-child {
+    padding-right: 0;
+    margin-bottom: 15px;
+}
+.msg {
+	text-align: center;
+    color: red;
 }

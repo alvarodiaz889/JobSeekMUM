@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Super Omega - Job Discover</title>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,16 +45,18 @@
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand page-scroll" href="#page-top">Super Omega &nbsp;<span><em>Job Discover</em></span></a>
-            </div>
-
+            </div>				
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+                	<li>
+                		<h5 class="msg">${msg }</h5>
+                	</li>
                     <li>
-                        <a class="page-scroll" href="#about" data-toggle="modal" data-target="#loginModal">LOG IN</a>
+                        <a class="page-scroll" href="#" data-toggle="modal" data-target="#loginModal">LOG IN</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#services">SIGN UP</a>
+                        <a class="page-scroll" href="#" data-toggle="modal" data-target="#signupModal">SIGN UP</a>
                     </li>                    
                 </ul>
             <!-- /.navbar-collapse -->
@@ -66,36 +68,82 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h2 class="modal-title" id="exampleModalLabel">Log In</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                 	<form action="<%=request.getContextPath()%>/post.do">
-						<table>
-							<tr>
-								<td><label>Email</label></td>
-								<td><input type="email" name="email" /></td>
-							</tr>
-							<tr>
-								<td><label>Password</label></td>
-								<td><input type="password" name="password" /></td>
-							</tr>
-							<tr>
-								<td><input type="submit" value="login" /></td>
-							</tr>
-						</table>
+                		<div class="form-group">
+                			<input type="email" id="loginEmail" class="form-control" name="email" placeholder="Enter Email Here.." required>
+                		</div>
+                		<div class="form-group">
+                			<input type="password" id="loginPw" class="form-control" name="password" placeholder="Enter Password Here.." required>
+                		</div>
+                		<div class="form-group">
+                			<input type="submit" class="btn" value="Log In">
+                		</div>
 					</form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
     </div>
-
+	<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLabel">Sign Up</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                	<form action="<%=request.getContextPath()%>/signUp.do" method="post">
+                		<div class="form-group">
+                			<input type="text" id="fullName" class="form-control" name="fullName" placeholder="Enter Full Name.." required>
+                		</div>
+                		<div class="form-group">
+                			<div class="col-sm-6">
+                				<select class="form-control" name="gender">
+                					<option value="f" selected>Female</option>
+                					<option value="m">Male</option>
+                				</select>
+                			</div>
+                			<div class="col-sm-6">
+                				<input type="number" name="birthYear" placeholder="Birth Year" class="form-control" required>
+                			</div>
+                		</div>
+                		<div class="form-group">
+                			<div class="col-sm-6">
+                				<input type="text" name="state" placeholder="State" class="form-control" required>
+                			</div>
+                			<div class="col-sm-6">
+                				<input type="text" name="city" placeholder="City" class="form-control" required>
+                			</div>
+                		</div>
+                		<div class="form-group">
+                			<div class="col-sm-6">
+                				<input type="number" name="zipCode" placeholder="Zip Code" class="form-control" required>
+                			</div>
+                			<div class="col-sm-6">
+                				<input type="email" name="email" placeholder="Email" class="form-control" required>
+                			</div>
+                		</div>
+                		<div class="form-group">
+                			<input type="password" id="loginPw" class="form-control" name="password" placeholder="Enter Password Here.." required>
+                		</div>
+                        <div class="form-group">
+                            <input type="password" id="loginPwConf" class="form-control" name="confPassword" placeholder="Confirm Password.." required>
+                        </div>
+                		<div class="form-group">
+                			<input type="submit" class="btn" value="Sign Up">
+                		</div>
+					</form>
+                </div>
+            </div>
+        </div>
+    </div>
     <header>
         <div class="header-content">
             <div class="header-content-inner">
@@ -108,49 +156,7 @@
             </div>
         </div>
     </header>	
-	
-	
-	
-	<h1>${msg }</h1>
-
-	<form action="<%=request.getContextPath()%>/signUp.do" method="post">
-		<table>
-			<tr>
-				<td><label>Full Name</label></td>
-				<td><input type="text" name="fullName" /></td>
-			</tr>
-			<tr>
-				<td><label>Gender</label></td>
-				<td><select name="gender"><option value="f">Female</option>
-						<option value="m">Male</option></select></td>
-			</tr>
-			<tr>
-				<td><label>BirthYear</label></td>
-				<td><input type="text" name="birthYear" /></td>
-			</tr>
-			<tr>
-				<td><label>State</label></td>
-				<td><input type="text" name="state" /></td>
-			</tr>
-			<tr>
-				<td><label>City</label></td>
-				<td><input type="text" name="city" /></td>
-			</tr>
-			<tr>
-				<td><label>Zip Code</label></td>
-				<td><input type="number" name="zipCode" /></td>
-			</tr>
-			<tr>
-				<td><label>Email</label></td>
-				<td><input type="email" name="email" /></td>
-			</tr>
-			<tr>
-				<td><label>Password</label></td>
-				<td><input type="password" name="password" /></td>
-			</tr>
-		</table>
-		<input type="submit" value="signUp" />
-	</form>q
+	<jsp:include page="post.jsp" />
 </body>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/assets/js/bootstrap.min.js"></script>
 </html>
