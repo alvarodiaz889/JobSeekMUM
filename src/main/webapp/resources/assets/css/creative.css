@@ -42,9 +42,9 @@ h6 {
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 p {
-  font-size: 16px;
+  font-size: 13px;
   line-height: 1.5;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .bg-primary {
   background-color: #F05F40;
@@ -461,7 +461,11 @@ body {
 }
 .comment {
 	background-color: #eee; 
+	border-bottom: 1px solid #FFF;
 }
 .bold{
 	font-weight: bold;
+}
+.space-sm{
+	margin-top: 10px;
 }
