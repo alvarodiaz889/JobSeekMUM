@@ -1,5 +1,7 @@
 package mum.cs472.magd.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 
@@ -48,8 +50,8 @@ public class PostController {
 	}
 	
 	
-	@RequestMapping(value ="/suggestPost")
-	public String suggestPost(HttpServletRequest request,Model model, 
+	@RequestMapping(value ="/addSuggestPost")
+	public String addSuggestPost(HttpServletRequest request,Model model, 
 			@RequestParam("postId") String postId,
 			@RequestParam("toUserId") String toUserId){
 		
@@ -68,6 +70,17 @@ public class PostController {
 			model.addAttribute("msg", "post not added ");
 		}
 		return "home";
+	}
+	
+	@RequestMapping(value ="/listSuggestPost")
+	public List<Post> listSuggestPost(HttpServletRequest request,Model model){
+		
+		
+		String userId = (String)request.getSession(true).getAttribute("userId");
+		boolean flag = false;
+		List<Post> post = postService.listSuggestPost(userId);
+		return null;
+		//return "home";
 	}
 	
 	@RequestMapping(value="/deletePost")
