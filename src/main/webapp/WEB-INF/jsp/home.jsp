@@ -76,7 +76,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                	<form action="<%=request.getContextPath()%>/post.do">
+                	<form action="<%=request.getContextPath()%>/post.do" method ="post">
                 		<div class="form-group">
                 			<input type="email" id="loginEmail" class="form-control" name="email" placeholder="Enter Email Here.." required>
                 		</div>
@@ -108,8 +108,8 @@
                 		<div class="form-group">
                 			<div class="col-sm-6">
                 				<select class="form-control" name="gender">
-                					<option value="f" selected>Female</option>
-                					<option value="m">Male</option>
+                					<option value="0" selected>Female</option>
+                					<option value="1">Male</option>
                 				</select>
                 			</div>
                 			<div class="col-sm-6">
@@ -124,6 +124,14 @@
                 				<input type="text" name="city" placeholder="City" class="form-control" required>
                 			</div>
                 		</div>
+                		
+                		<div class="form-group">
+                			<div class="col-sm-6">
+                				<input type="text" name="street" placeholder="Street" class="form-control" required>
+                			</div>
+                			
+                		</div>
+                		
                 		<div class="form-group">
                 			<div class="col-sm-6">
                 				<input type="number" name="zipCode" placeholder="Zip Code" class="form-control" required>
