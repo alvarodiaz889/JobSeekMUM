@@ -1,18 +1,22 @@
 package mum.cs472.magd.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-
-import mum.cs472.magd.entity.Comment;
-import mum.cs472.magd.service.CommentService;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.google.gson.Gson;
+
+import mum.cs472.magd.entity.Comment;
+import mum.cs472.magd.service.CommentService;
 
 @Controller
 public class CommentController {
@@ -21,7 +25,7 @@ public class CommentController {
 	private CommentService commentService;
 	
 	@RequestMapping("/viewComment")
-	public String viewComments(HttpServletRequest request, Model model, @RequestParam("postId") String postId){
+	public void viewComments(HttpServletRequest request, Model model, HttpServletResponse response, @RequestParam("postId") String postId){
 		
 		List<Comment> comments = new ArrayList<>();
 		try{
@@ -33,7 +37,14 @@ public class CommentController {
 			model.addAttribute("msg", "No comments found !");
 		}
 		}catch(Exception e){e.printStackTrace();}
-		return "home";
+		try {
+			String json =  "" ; 
+			json =new Gson().toJson(comments);
+			response.getWriter().write("{ \"data\":"   + json + " }"); 
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+
 	}
 	
 	@RequestMapping("/addComment")

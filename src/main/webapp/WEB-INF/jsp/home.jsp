@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Mafi, Alvaro, Danyal, German">
+    <meta name="author" content="Mafi, Alvaro, Daniyal, German">
 
     <!-- Bootstrap Core CSS -->
     <link href="<%=request.getContextPath() %>/resources/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -64,7 +65,12 @@
                     </li>
                     <li>
                         <a class="page-scroll" href="#" data-toggle="modal" data-target="#signupModal">SIGN UP</a>
-                    </li>                    
+                    </li> 
+                      
+                
+                <li><a class="page-scroll" href="#"><m:today/></a></li>
+                
+                                   
                 </ul>
             <!-- /.navbar-collapse -->
         </div>
@@ -73,6 +79,7 @@
 
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
+        
             <div class="modal-content">
                 <div class="modal-header">
                     <h2 class="modal-title" id="exampleModalLabel">Log In</h2>
@@ -80,6 +87,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+             
                 <div class="modal-body">
                 	<form action="<%=request.getContextPath()%>/post.do" method ="post">
                 		<div class="form-group">

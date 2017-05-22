@@ -58,4 +58,19 @@ public class UserServiceImple implements UserService {
 		}
 		return userId;
 	}
+	@Override
+	public List<User> listUsers() {
+		String query = "SELECT * FROM USERS";
+		@SuppressWarnings("unchecked")
+		List<User> usersList = dao.getData(query);
+		return usersList;
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> userProfile(String userId) {
+		String query ="SELECT * FROM USERS WHERE USERID = ?" ;
+		List<User>userProfile  = new ArrayList<>();
+		userProfile = dao.getData(query, new Object[]{userId});
+		return userProfile;
+	}
 }

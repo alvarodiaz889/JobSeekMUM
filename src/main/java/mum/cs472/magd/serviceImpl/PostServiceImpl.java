@@ -1,13 +1,13 @@
 package mum.cs472.magd.serviceImpl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 
 import mum.cs472.magd.dao.GenericDao;
 import mum.cs472.magd.entity.Post;
-import mum.cs472.magd.entity.User;
+
 import mum.cs472.magd.service.PostService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +51,7 @@ public class PostServiceImpl implements PostService {
 		boolean flag = dao.update(query, params);
 		return flag;
 	}
+	@SuppressWarnings("rawtypes")
 	@Override
 	public List listSuggestPost(String userId) {
 		List listSugPosts = new ArrayList();
@@ -61,7 +62,14 @@ public class PostServiceImpl implements PostService {
 		listSugPosts = dao.getData(query, new Object[]{userId});
 		return listSugPosts;
 	}
-
-	
+	@SuppressWarnings("rawtypes")
+	@Override
+	public List listUserPosts() {
+		List posts = new ArrayList();
+		String query = "SELECT * FROM POSTS P, USERS U " +
+						"WHERE P.USERID = U.USERID ";
+		posts = dao.getData(query);
+		return posts;
+	}
 
 }

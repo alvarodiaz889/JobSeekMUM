@@ -446,6 +446,7 @@ body {
 }
 .post-panel {
 	color: #333;
+	margin-bottom: 0;
 }
 .post-date {
 	font-size: 12px;
@@ -466,6 +467,35 @@ body {
 .bold{
 	font-weight: bold;
 }
+.italic {
+	font-style: italic;
+}
 .space-sm{
 	margin-top: 10px;
+}
+.post-desc {
+    height: 80px;
+    overflow: hidden;
+}
+.post-wrapper {
+    border-bottom: 1px dashed #F05F40;
+}
+.limit-text {
+    height: 122px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#mySugPosts div{
+	text-align: left;
+	padding-left: 10px;
+}
+.sugjobs{
+	padding: 10px;
+
+}
+
+#suggestPostWindow{
+	width: 500px;
+	height: 120px;
+	padding-left: 50px;
 }
