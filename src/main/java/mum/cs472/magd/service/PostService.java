@@ -14,5 +14,6 @@ public interface PostService {
 	boolean deletePost(Post post);
 	boolean suggestPost(String userId, String postId, String toUserId);
 	List listSuggestPost(String userId);
+	List listUserPosts();
 	
 }

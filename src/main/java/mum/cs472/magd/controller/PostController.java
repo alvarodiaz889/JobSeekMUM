@@ -57,7 +57,7 @@ public class PostController {
 	}
 	
 	@RequestMapping(value ="/getPosts")
-	public String getPosts(HttpServletRequest request,Model model){	
+	public void getPosts(HttpServletRequest request,Model model,HttpServletResponse response){	
 		
 		List<Post> posts = new ArrayList<>();
 		try{ 
@@ -66,7 +66,32 @@ public class PostController {
 			ex.printStackTrace();
 		}
 		
-		return "home";
+		try {
+			String json =  "" ; 
+			json =new Gson().toJson(posts);
+			response.getWriter().write("{ \"data\":"   + json + " }");
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		} 
+	}
+	
+	@RequestMapping(value ="/listUserPosts")
+	public void listUserPosts(HttpServletRequest request,Model model,HttpServletResponse response){	
+		
+		List posts = new ArrayList();
+		try{ 
+			posts =postService.listUserPosts();		
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		try {
+			String json =  "" ; 
+			json =new Gson().toJson(posts);
+			response.getWriter().write("{ \"data\":"   + json + " }");
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		} 
 	}
 	
 	

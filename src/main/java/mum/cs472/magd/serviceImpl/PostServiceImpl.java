@@ -61,7 +61,13 @@ public class PostServiceImpl implements PostService {
 		listSugPosts = dao.getData(query, new Object[]{userId});
 		return listSugPosts;
 	}
-
-	
+	@Override
+	public List listUserPosts() {
+		List posts = new ArrayList();
+		String query = "SELECT * FROM POSTS P, USERS U " +
+						"WHERE P.USERID = U.USERID ";
+		posts = dao.getData(query);
+		return posts;
+	}
 
 }
