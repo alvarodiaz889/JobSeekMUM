@@ -17,5 +17,6 @@ public interface PostService {
 	List listSuggestPost(String userId);
 	@SuppressWarnings("rawtypes")
 	List listUserPosts();
+	List getMyPosts(String userId);
 	
 }

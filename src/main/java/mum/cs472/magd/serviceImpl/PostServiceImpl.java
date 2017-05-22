@@ -44,7 +44,7 @@ public class PostServiceImpl implements PostService {
 	}
 	@Override
 	public boolean suggestPost(String userId, String postId, String toUserId) {
-		String query = "INSERT INTO SUGGESTJOB(POSTID,USERID,TOUSERID,DATECREATED) "+
+		String query = "INSERT INTO SUGGESTPOST(POSTID,USERID,TOUSERID,DATECREATED) "+
 				"VALUES(?,?,?,SYSDATE()) ";
 		Object[] params = new Object[]{postId, userId,toUserId};
 		
@@ -69,6 +69,14 @@ public class PostServiceImpl implements PostService {
 		String query = "SELECT * FROM POSTS P, USERS U " +
 						"WHERE P.USERID = U.USERID ";
 		posts = dao.getData(query);
+		return posts;
+	}
+	@Override
+	public List getMyPosts(String userId) {
+		List posts = new ArrayList();
+		String query = "SELECT * FROM POSTS P, USERS U " +
+						"WHERE P.USERID = U.USERID AND P.USERID = ? ";
+		posts = dao.getData(query, new Object[]{userId});
 		return posts;
 	}
 

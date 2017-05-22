@@ -152,5 +152,25 @@ public class PostController {
 		}catch(Exception ex){}
 		return "home";
 	}
+	
+	@RequestMapping(value ="/listMyPosts")
+	public void listMyPosts(HttpServletRequest request,Model model,HttpServletResponse response){	
+		
+		List posts = new ArrayList();
+		try{ 
+			String userId = (String)request.getSession(true).getAttribute("userId");
+			posts = postService.getMyPosts(userId);	
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		try {
+			String json =  "" ; 
+			json =new Gson().toJson(posts);
+			response.getWriter().write("{ \"data\":"   + json + " }");
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		} 
+	}
 			
 }
