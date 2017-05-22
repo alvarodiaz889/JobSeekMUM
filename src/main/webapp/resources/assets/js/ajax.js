@@ -75,8 +75,37 @@ $(function(){
 		  .fail(showError);
 	}
 	
+	
+	
 	function showSuggestedPosts(data){
-		console.log(data);
+		var dataDisplay = "";
+		let postArr = JSON.parse(data).data;
+		console.log(postArr);
+		for (let x in postArr){
+			var aJob = $("<a/>",{
+				class: "bold",
+				text: postArr[x].POSTTITLE
+			});
+			
+			var s = $("<span>",{
+				text: " has suggested this job: "
+			});
+			var p = $("<a/>",{
+				class: "bold",
+				text: postArr[x].FULLNAME
+			}); 
+		
+			var d = $("<div>", {
+				class: "sugjobs"
+			});
+			$(d).append(p);
+			$(d).append(s);
+			$(d).append(aJob);
+			$('#mySugPosts').append(d);
+		}
+
+		console.log(dataDisplay);
+                                                                                                                                                                                                                                                                  
 	}
 	
 	function showError(){

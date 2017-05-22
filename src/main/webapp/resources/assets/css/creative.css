@@ -466,6 +466,15 @@ body {
 .bold{
 	font-weight: bold;
 }
+<<<<<<< ac1db5c0eb54e68e146972ec599d272f2a25354f
 .space-sm{
 	margin-top: 10px;
+=======
+#mySugPosts div{
+	text-align: left;
+	padding-left: 10px;
+}
+.sugjobs{
+	padding: 10px;
+>>>>>>> 595e13065a780c96b0c8ac3aff97774dd3e0844e
 }
