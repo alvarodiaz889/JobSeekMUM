@@ -13,4 +13,5 @@ public interface UserService {
 	public boolean insertUser(User user);
 	public String getUserId(User user);
 	public List<User> listUsers();
+	public List<User> userProfile(String userId);
 }
