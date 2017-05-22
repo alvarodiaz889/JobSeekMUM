@@ -102,7 +102,11 @@ $(function(){
 				'data-attr'	:	'#' + postArr[x].postid,
 				text 		: 	'view comments'
 			});			
-			let twoFourbtn = $('<button>', {class : 'btn bg-primary', text : 'Suggest Post'});
+			let twoFourbtn = $('<button>', {
+				class 		: 'btn bg-primary btn-sug-action', 
+				'postid' 	: 	postArr[x].postid, 
+				text 		: 'Suggest Post'
+			});
 			let readMore = $('<a>', {
 				'href' 	: 	'#' + postArr[x].postid, 
 				'class'	:	'readMorePost italic',
@@ -204,6 +208,17 @@ $(function(){
 	/*
 	 * SuggestedPosts
 	 */
+	function suggestPost(toUserId, postId){
+		$.ajax("/JobSeekMum/addSuggestPost",{
+			"type":"POST",
+			"data": { 
+				"toUserId": toUserId,
+				"postId": postId
+			},
+		}).done($("#messageSpace").append(successMsg))
+		  .fail(showError);
+	}
+	
 	function listSuggestedPosts(){
 	
 		$.ajax("/JobSeekMum/listSuggestPost",{
@@ -213,7 +228,34 @@ $(function(){
 	}
 	
 	function showSuggestedPosts(data){
-		console.log(data);
+		var dataDisplay = "";
+		let postArr = JSON.parse(data).data;
+		console.log(postArr);
+		for (let x in postArr){
+			var aJob = $("<a/>",{
+				class: "bold",
+				text: postArr[x].POSTTITLE
+			});
+			
+			var s = $("<span>",{
+				text: " has suggested this job: "
+			});
+			var p = $("<a/>",{
+				class: "bold",
+				text: postArr[x].FULLNAME
+			}); 
+		
+			var d = $("<div>", {
+				class: "sugjobs"
+			});
+			$(d).append(p);
+			$(d).append(s);
+			$(d).append(aJob);
+			$('#mySugPosts').append(d);
+		}
+
+		console.log(dataDisplay);
+                                                                                                                                                                                                                                                                  
 	}
 	
 	function showError(){

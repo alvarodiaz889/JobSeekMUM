@@ -1,6 +1,10 @@
 package mum.cs472.magd.controller;
 
+import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import mum.cs472.magd.entity.User;
@@ -10,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.google.gson.Gson;
 
 
 @Controller
@@ -42,5 +48,16 @@ public class UserController {
 		}
 		
 		return "home";
+	}
+	
+	
+	@RequestMapping(value="getUsers")
+	public void getUSers(HttpServletRequest request,HttpServletResponse response, Model model) throws IOException{
+		
+		String userId = (String)request.getSession(true).getAttribute("userId");
+		List<User> users = userService.listUsers();
+		String json =  "" ; 
+		json =new Gson().toJson(users);
+		response.getWriter().write("{ \"data\":"   + json + " }"); 
 	}
 }

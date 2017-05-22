@@ -467,6 +467,7 @@ body {
 .bold{
 	font-weight: bold;
 }
+<<<<<<< HEAD
 .italic {
 	font-style: italic;
 }
@@ -484,4 +485,12 @@ body {
     height: 122px;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+#mySugPosts div{
+	text-align: left;
+	padding-left: 10px;
+}
+.sugjobs{
+	padding: 10px;
+
 }
