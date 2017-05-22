@@ -9,8 +9,12 @@ $(function(){
 	
 	
 	var imagePath = "/JobSeekMum/resources/images/";
+	//Retrieve suggested posts
 	listSuggestedPosts();
+	//Retrieve all posts
 	getPosts();
+	//Retrieve MyPosts
+	getMyPosts();
 	
 	/*
 	 * MyPost
@@ -18,40 +22,8 @@ $(function(){
 	$("#myPostSubmit").click(function(){
 		createMyPost();
 	});
-	/*
-	 * SuggetsPost Btn from post 
-	 */
-	$("#sug-btn-action").click(function(){
-		//Set idPost
-		$("#idUSerSugPost").val($(this).attr("postid"));
-		//Get all users
-		$.ajax("/JobSeekMum/getUsers",{
-			"type":"POST"
-		}).done(function(data){
-			//console.log(data);
-			var data = JSON.parse(data).data;
-			console.log(data);
-			var listitems;
-			$.each(data, function(key, value){
-			    listitems += '<option value=' + value.userid + '>' + value.fullname + '</option>';
-			});
-			$("#listUserToSug").append(listitems);
-		})
-		  .fail(showError);
-	});
-	//Action of Sugegst Btn in Window
 	
-	$("#btnSuggetPost").click(function(){
-		//Select userid
-		var userIdSugPost = $("#listUserToSug").val()
-		var postId = $("#idUSerSugPost").val(); 
-			
-		console.log("Attribute postId:" + postId + " user: " + userIdSugPost);
-		//suggestPost
-	});
-	
-	
-	
+	//Activate Button MyPost
 	$(".MyPostForm").keydown(function(){
 		let type = $("#myPostType").val();
 		let body = $("#myPostBody").val();
@@ -62,6 +34,7 @@ $(function(){
 		}
 	});
 	
+	//Create MyPost
 	function createMyPost(){
 		let userId = 1;
 		let type = $("#myPostType").val();
@@ -80,6 +53,143 @@ $(function(){
 		  .fail(showError);
 	}
 	
+	//Get MyPosts
+	function getMyPosts() {		
+		$.get("/JobSeekMum/listMyPosts").done(retrieveMyPosts).fail(showError);
+	}
+	
+	function retrieveMyPosts(data) {console.log(data);
+	let postArr = JSON.parse(data).data; 
+	for (let x in postArr){
+		let limit = $('<div>', { class : 'limit-text' });
+		let main = $('<div>', { class : 'post-wrapper-my-posts' });
+		let one = $('<div>', { class : 'row' });
+		let two = $('<div>', { class : 'col-sm-12' });
+		let twoTwo = $('<div>', { class : 'col-sm-4 likes' });
+		let twoThree = $('<div>', { class : 'col-sm-4' });
+		let twoFour = $('<div>', { class : 'col-sm-4' });
+		let three = $('<div>', { class : 'col-sm-2' });
+		let threeTwo = $('<div>', { class : 'col-sm-10 text-left' });
+		let threeImg = $('<img>', {
+			class	:	'img-circle',
+			alt		:	"user image",
+			src		:	imagePath + "user.jpg"
+		});
+		let threep1 = $('<p>', {
+			text	:	postArr[x].fullname
+		});
+		let threep2 = $('<p>', {
+			class	:	'post-date grey-txt',
+			text	:	'Posted on : ' + postArr[x].datecreated
+		});
+		let threep3 = $('<p>', {
+			class	:	'post-date grey-txt',
+			text	:	'Last Updated : ' + postArr[x].dateupdated
+		});
+		let threepTwoh3 = $('<h3>', {
+			class	:	'post-title',
+			text	:	postArr[x].posttitle
+		});
+		let threepTwoh4 = $('<h4>', {
+			class	:	'post-cat grey-txt',
+			text	:	postArr[x].posttype
+		});
+		let threepTwop = $('<p>', {
+			class	:	'post-desc',
+			text	:	 postArr[x].post
+		});
+		let twoTwoImg = $('<img>', {
+			alt		:	'like image',
+			src		:	imagePath + 'like.png'
+		});
+		let twoTwoSpan = $('<span>', {class : 'grey-txt', text : '30'});
+		let twoThreea = $('<a>', {
+			class		:	'view-comments italic', 
+			href		: 	'#', 
+			'data-attr'	:	'#' + postArr[x].postid,
+			text 		: 	'view comments'
+		});			
+		let twoFourbtn = $('<button>', {
+			class 		: 'btn bg-primary btn-sug-action', 
+			'postid' 	: 	postArr[x].postid, 
+			text 		: 'Suggest Post'
+		});
+		let readMore = $('<a>', {
+			'href' 	: 	'#' + postArr[x].postid, 
+			'class'	:	'readMorePost italic',
+			'text' : 	'..readmore'
+		});		
+		let hiddenPostid = $('<input>', {
+			'type' 	: 	'hidden', 
+			'class'	:	'postId',
+			'value' : 	postArr[x].postid
+		});		
+		
+		
+		$(main).html(one).append(hiddenPostid);
+		$(one).html(two);
+		$(two).html(three).append(threeTwo);
+		$(twoTwo).html(twoTwoImg).append(twoTwoSpan);
+		$(twoThree).html(twoThreea);
+		$(twoFour).html(twoFourbtn);
+		$(three).html(threeImg).append(threep1).append(threep2).append(threep3);
+		$(limit).html(threepTwop).append(readMore);
+		$(threeTwo).html(threepTwoh3).append(threepTwoh4).append(limit).append(twoTwo).append(twoThree).append(twoFour);
+	
+		//getComments();
+		$('#panel4').append(main);
+		console.log(postArr[x]);
+	}
+}
+	
+	/*
+	 * SuggetsPost Btn from post 
+	 */
+
+	$('#panel2').on('click', '.btn-sug-action', function() {
+		//Clear items
+		$('#listUserToSug').empty();
+		//Set idPost
+		$("#idPostSug").val($(this).attr("postid"));
+		//Get all users
+		$.ajax("/JobSeekMum/getUsers",{
+			"type":"POST"
+		}).done(function(data){
+			//console.log(data);
+			var data = JSON.parse(data).data;
+			console.log(data);
+			var listitems;
+			$.each(data, function(key, value){
+			    listitems += '<option value=' + value.userid + '>' + value.fullname + '</option>';
+			});
+			$("#listUserToSug").append(listitems);
+		})
+		  .fail(showError);
+	});
+	
+	//Action of Suggest Btn in Window
+	$("#btnSuggetPost").click(function(){
+		//Select userid
+		var userId = $("#listUserToSug").val()
+		var postId = $("#idPostSug").val(); 
+			
+		console.log("Attribute postId:" + postId + " user: " + userId);
+		$.ajax("/JobSeekMum/addSuggestPost",{
+			"type":"POST",
+			"data": { 
+				"postId": postId,
+				"toUserId": userId
+			},
+		}).done($("#messageSpace").append(successMsg))
+		  .fail(showError);
+	});
+	
+	
+	
+	
+	/*
+	 * Get POSTS
+	 */
 	function getPosts() {		
 		$.get("/JobSeekMum/listUserPosts").done(retrievePosts).fail(showError);
 	}
