@@ -18,6 +18,39 @@ $(function(){
 	$("#myPostSubmit").click(function(){
 		createMyPost();
 	});
+	/*
+	 * SuggetsPost Btn from post 
+	 */
+	$("#sug-btn-action").click(function(){
+		//Set idPost
+		$("#idUSerSugPost").val($(this).attr("postid"));
+		//Get all users
+		$.ajax("/JobSeekMum/getUsers",{
+			"type":"POST"
+		}).done(function(data){
+			//console.log(data);
+			var data = JSON.parse(data).data;
+			console.log(data);
+			var listitems;
+			$.each(data, function(key, value){
+			    listitems += '<option value=' + value.userid + '>' + value.fullname + '</option>';
+			});
+			$("#listUserToSug").append(listitems);
+		})
+		  .fail(showError);
+	});
+	//Action of Sugegst Btn in Window
+	
+	$("#btnSuggetPost").click(function(){
+		//Select userid
+		var userIdSugPost = $("#listUserToSug").val()
+		var postId = $("#idUSerSugPost").val(); 
+			
+		console.log("Attribute postId:" + postId + " user: " + userIdSugPost);
+		//suggestPost
+	});
+	
+	
 	
 	$(".MyPostForm").keydown(function(){
 		let type = $("#myPostType").val();
@@ -208,6 +241,8 @@ $(function(){
 	/*
 	 * SuggestedPosts
 	 */
+	
+	
 	function suggestPost(toUserId, postId){
 		$.ajax("/JobSeekMum/addSuggestPost",{
 			"type":"POST",
@@ -248,6 +283,7 @@ $(function(){
 			var d = $("<div>", {
 				class: "sugjobs"
 			});
+			
 			$(d).append(p);
 			$(d).append(s);
 			$(d).append(aJob);

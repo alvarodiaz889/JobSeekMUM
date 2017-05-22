@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+
+<!-- Suggest Post -->    
+<div id="suggestPostWindow">
+	<h3 class="post-title">Suggest Post</h3>
+	<select id="listUserToSug"></select>
+	<input type="button" class="btn bg-primary" id="btnSuggetPost" value="SUGGEST POST">
+	<input type="hidden" id="idUSerSugPost" value="">
+</div>
+<!-- Suggets Post -->
+    
 	<section class="bg-primary" id="posts">
         <div class="container">
             <div class="row">
