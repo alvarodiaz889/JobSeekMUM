@@ -36,8 +36,11 @@
 								</div>
 							</div>
 							<div class="col-sm-4 likes">
-								<img class="" alt="like image" src="<%=request.getContextPath() %>/resources/images/like.png">
-								<span class="grey-txt">30</span>
+								<a id="likeLink" data-toggle="tooltip">
+									<img id="likeImg" class="" alt="like" src="<%=request.getContextPath() %>/resources/images/like.png">
+								</a>
+								<input id="likeId" type="hidden" >
+								<span id="likeTxt" class="grey-txt">30</span>
 							</div>
 							<div class="col-sm-4">
 								<a href="#" class="view-comments"><em>view comments(10)</em></a>

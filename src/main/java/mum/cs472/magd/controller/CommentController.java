@@ -53,4 +53,21 @@ public class CommentController {
 		}catch(Exception ex){ex.printStackTrace();}
 		return "home";
 	}
+	
+	@RequestMapping(value="/deleteComment")
+	public String deleteComment(HttpServletRequest request,Model model, @RequestParam("commentId") String commentId){
+		boolean flag = false;
+		String msg = "";
+		try{
+			flag = commentService.deleteComment(commentId);
+			if(flag){
+				msg = "Comment deleted Successfully";
+			}
+		} 
+		catch(Exception ex){
+			msg ="Error deleting comment";
+		}
+		model.addAttribute("msg", msg);
+		return "home";
+	}
 }
