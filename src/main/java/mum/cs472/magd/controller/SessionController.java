@@ -30,7 +30,7 @@ public class SessionController {
 	public static String errMsg = "";
 
 	
-	@SuppressWarnings("finally")
+	@SuppressWarnings({ "finally", "unused" })
 	@RequestMapping(value="post")
 	public String verifyAdminLogin(HttpServletRequest request, Model model,User user){
 		String message = "";
