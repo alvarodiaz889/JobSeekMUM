@@ -25,7 +25,6 @@
 						</div>
 					</div>
 					<div class="post-panel panel panel-default" id="panel2">
-<<<<<<< HEAD
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="col-sm-2">
@@ -106,9 +105,6 @@
 								</div>
 							</div>
 						</div>
-=======
-						
->>>>>>> 96f8eedaa84afba1061851091b5a108abe3fc709
 					</div>
 					<div class="post-panel panel panel-default"  id="panel3">
 						<div class="panel-body" id="panelContent">

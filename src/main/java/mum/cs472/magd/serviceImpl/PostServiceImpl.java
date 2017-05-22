@@ -37,9 +37,9 @@ public class PostServiceImpl implements PostService {
 		return flag;
 	}
 	@Override
-	public boolean deletePost(Post post) {
+	public boolean deletePost(String postId) {
 		String query ="DELETE FROM POSTS WHERE POSTID = ? ";
-		boolean flag = dao.update(query, new Object[]{post.getPostId()} );
+		boolean flag = dao.update(query, new Object[]{postId} );
 		return flag;
 	}
 	@Override

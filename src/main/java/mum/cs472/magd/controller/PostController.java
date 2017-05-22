@@ -138,11 +138,12 @@ public class PostController {
 	}
 	
 	@RequestMapping(value="/deletePost")
-	public String deletePost(HttpServletRequest request, Model model, Post post){
+	public String deletePost(HttpServletRequest request, Model model, 
+			@RequestParam("postId") String postId){
 		
 		boolean flag = false;
 		try{
-			flag = postService.deletePost(post);
+			flag = postService.deletePost(postId);
 			if(flag){
 				model.addAttribute("msg", "Post deleted Succesfully");
 			}

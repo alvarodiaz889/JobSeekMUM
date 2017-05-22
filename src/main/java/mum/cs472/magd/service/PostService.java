@@ -11,7 +11,7 @@ public interface PostService {
 
 	List<Post> getPosts();
 	boolean insertPost(Post post,String userId);
-	boolean deletePost(Post post);
+	boolean deletePost(String postId);
 	boolean suggestPost(String userId, String postId, String toUserId);
 	@SuppressWarnings("rawtypes")
 	List listSuggestPost(String userId);
