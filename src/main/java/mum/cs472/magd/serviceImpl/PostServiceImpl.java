@@ -79,5 +79,12 @@ public class PostServiceImpl implements PostService {
 		posts = dao.getData(query, new Object[]{userId});
 		return posts;
 	}
+	@Override
+	public List getPostById(String postId) {
+		String query = "SELECT * FROM POSTS WHERE POSTID = ? ";
+		List postList = new ArrayList();
+		postList = dao.getData(query, new Object[]{postId});
+		return postList;
+	}
 
 }

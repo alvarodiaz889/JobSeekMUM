@@ -18,5 +18,6 @@ public interface PostService {
 	@SuppressWarnings("rawtypes")
 	List listUserPosts();
 	List getMyPosts(String userId);
+	List getPostById(String postId);
 	
 }
