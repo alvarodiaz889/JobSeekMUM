@@ -409,8 +409,98 @@ $(function(){
 		alert("Error");
 	}
 	
-
+	/******** LIKES *********/
+	$("#likeImg").click(function(){
+		
+		var action = $("#likeImg").attr("alt");
+		var userId = 4;
+		var postId = 1;
+		var likeId = $("#likeId").val();
+		//alert(action);	
+		if(action === "like")
+		{
+			saveLike(postId);
+		}
+		else
+		{
+			removeLike(likeId);				
+		}	
+		setTimeout(function(){ updateLikes(postId); }, 1000);	
+		
+	});
 	
+	function saveLike(postId)
+	{
+		$.ajax("/JobSeekMum/setLike",{
+			"type":"POST",
+			"async": "false",
+			"data": { 
+				"postId": postId
+				
+			}
+		})
+		.done(saveLikeSuccess)
+		  .fail(showError);			
+	}
 	
+		
+	function removeLike(likeId)
+	{
+		$.ajax("/JobSeekMum/unLike",{
+			"type":"POST",
+			"async": "false",
+			"data": { 
+				"likeId": likeId
+			}
+		}).done(removeLikeSuccess)
+		  .fail(showError);
+	}
 	
+	function updateLikes(postId)
+	{
+		$.ajax("/JobSeekMum/getLikes",{
+			"type":"POST",
+			"async": "false",
+			"data": { 
+				"postId": postId
+			}
+		})
+		.done(updateLikesSuccess)
+		  .fail(showError);			
+	}
+	
+	//--callbacks--
+	function saveLikeSuccess(data)
+	{
+		console.log(data);
+		let id = JSON.parse(data).data[0].likeid;
+		$("#likeId").val(id);
+		$("#likeImg").attr("alt","unlike");
+		let src = $("#likeImg").attr("src").toString();
+		src = src.replace("like.png","like2.png");
+		$("#likeImg").attr("src",src);
+	}
+	
+	function removeLikeSuccess()
+	{
+		$.ajaxSetup({ cache: false });
+		$("#likeId").val("");
+		$("#likeImg").attr("alt","like");
+		let src = $("#likeImg").attr("src").toString();
+		src = src.replace("like2.png","like.png");
+		$("#likeImg").attr("src",src);
+	}
+	
+	function updateLikesSuccess(data)
+	{
+		var users = JSON.parse(data).data;
+		var usersNames="";
+		for(var obj in users)
+		{
+			usersNames += users[obj].fullname + '\n';
+		}
+		$("#likeTxt").text(users.length);
+		$("#likeLink").attr("title",usersNames);
+	}
+		
 });

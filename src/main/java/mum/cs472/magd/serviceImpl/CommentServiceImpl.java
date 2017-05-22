@@ -34,9 +34,9 @@ public class CommentServiceImpl implements CommentService {
 		return comments;
 	}
 	@Override
-	public boolean deleteComment(Comment comment) {
+	public boolean deleteComment(String comment) {
 		String query = "DELETE FROM COMMENTS WHERE COMMENTID  = ?";
-		boolean flag  = dao.update(query, new Object[]{comment.getCommentId()});
+		boolean flag  = dao.update(query, new Object[]{comment});
 		return flag;
 	}
 
