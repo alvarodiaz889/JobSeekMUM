@@ -14,7 +14,7 @@ public class TagHandler extends TagSupport {
 		try {
 			out.print(Calendar.getInstance().getTime());
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println(e); //<%@ taglib uri="mytags.tld" prefix="m" %>
 		}
 		return SKIP_BODY;
 	}

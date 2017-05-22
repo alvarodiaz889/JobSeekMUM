@@ -67,6 +67,17 @@ $(function(){
 	/*
 	 * SuggestedPosts
 	 */
+	function suggestPost(toUserId, postId){
+		$.ajax("/JobSeekMum/addSuggestPost",{
+			"type":"POST",
+			"data": { 
+				"toUserId": toUserId,
+				"postId": postId
+			},
+		}).done($("#messageSpace").append(successMsg))
+		  .fail(showError);
+	}
+	
 	function listSuggestedPosts(){
 	
 		$.ajax("/JobSeekMum/listSuggestPost",{
@@ -74,8 +85,6 @@ $(function(){
 		}).done(showSuggestedPosts)
 		  .fail(showError);
 	}
-	
-	
 	
 	function showSuggestedPosts(data){
 		var dataDisplay = "";
