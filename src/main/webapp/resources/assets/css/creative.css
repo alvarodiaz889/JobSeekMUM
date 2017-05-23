@@ -521,7 +521,7 @@ body {
 #addPostModal .modal-body {
     min-height: 250px;
 }
-#profileLink img {
+.profileLink img {
 	width : 40px;
 	border: 2px solid #F05F40;
 }
