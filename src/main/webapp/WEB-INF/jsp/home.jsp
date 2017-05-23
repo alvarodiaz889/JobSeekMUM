@@ -59,7 +59,21 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+<script>
 
+function validateAge(){
+	let birthYear = $("#birthYear").val();
+	
+	let currYear = new Date().getFullYear();
+	
+	if(currYear - birthYear<18){
+		alert('you should be atlease 18');
+		return false;
+	}
+	
+	
+}
+</script>
 </head>
 <body id="page-top">
 	<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
@@ -216,7 +230,7 @@
 						</div>
 						<div class="modal-body">
 							<form action="<%=request.getContextPath()%>/signUp.do"
-								method="post">
+								method="post" onsubmit="validateAge()">
 								<div class="form-group">
 									<input type="text" id="fullName" class="form-control"
 										name="fullName" placeholder="Enter Full Name.." required>
@@ -230,7 +244,7 @@
 									</div>
 									<div class="col-sm-6">
 										<input type="number" name="birthYear" placeholder="Birth Year"
-											class="form-control" required>
+											class="form-control" required="required" id="birthYear">
 									</div>
 								</div>
 								<div class="form-group">
