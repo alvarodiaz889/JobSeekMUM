@@ -64,6 +64,7 @@
 <body id="page-top">
 	<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
 	<div class="messageSpace" id="messageSpace"></div>
+<<<<<<< HEAD
 	<div class="notification-show" style="display: none;"></div>
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
@@ -266,6 +267,83 @@
 									<input type="submit" class="btn" value="Sign Up">
 								</div>
 							</form>
+
+	
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">Super Omega &nbsp;<span><em>Job Discover</em></span></a>
+            </div>				
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">                	
+                    <li>
+                        <a class="page-scroll" href="#" data-toggle="modal" data-target="#loginModal">LOG IN</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#" data-toggle="modal" data-target="#signupModal">SIGN UP</a>
+                    </li>                   	
+                    <li>
+                    	<a class="page-scroll" href="#"><m:today/></a>
+                   	</li>     
+                </ul>
+                <ul class="nav navbar-nav navbar-right hide">                	
+                	<li>
+                		<button class="btn bg-primary space-sm" data-toggle="modal" data-target="#addPostModal">+ Add a New Post</button>
+                	</li>
+                    <li>
+                        <a class="page-scroll" href="#">LOG OUT</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#" id="profileLink" title="My Profile">
+                        	<img alt="profile link image" class="img-circle" src="<%=request.getContextPath() %>/resources/images/user.jpg">
+                        </a>
+                    </li>                   	
+                    <li>
+                    	<a class="page-scroll" href="#"><m:today/></a>
+                   	</li>     
+                </ul>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+	
+        <!-- Add post Modal -->
+        	<div class="modal fade"  id="addPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">        
+		            <div class="modal-content">
+		                <div class="modal-header">
+		                    <h2 class="modal-title" id="exampleModalLabel">Add a New Post</h2>
+		                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                        <span aria-hidden="true">&times;</span>
+		                    </button>
+		                </div>
+		             
+		                <div class="modal-body">
+						   <div class="form-group">
+	                			<div class="col-sm-12">
+	                				<select class="form-control  MyPostForm" id="myPostType" >
+	                					<option value="" >Select type</option>
+	                					<option value="JAVADEVELOPER" >Java Developer</option>
+	                					<option value="NETDEVELOPER">.Net Developer</option>
+	                					<option value="WEBDEVELOPER">Web Developer</option>
+	                				</select>
+	                			</div>
+	                			<div class="col-sm-12 space-sm">
+	                				<input type="text" id="myPostTitle" class="form-control MyPostForm" placeholder="Title" >
+	                				<br>
+	                			</div>
+	                			<div class="col-sm-12">
+	                				<textarea id="myPostBody" class="form-control MyPostForm"  placeholder="Text" ></textarea>
+	                			</div>
+	                			<div class="col-sm-12 space-sm">
+	                				<input type="submit" class="btn" value="Submit" id="myPostSubmit" disabled="disabled">
+	                			</div>
+	               			</div>
+
 						</div>
 					</div>
 				</div>
@@ -290,7 +368,30 @@
 			</c:when>
 			</c:choose>
 
-			<h1>${msg }</h1>
 	
+
+ <!-- Notification  -->    
+    <div class="modal fade" id="notificationWindow" tabindex="-1" role="dialog" aria-hidden="true">
+       <div class="modal-dialog" role="document">       
+           <div class="modal-content">
+               <div class="modal-header">
+                   <h2 class="modal-title" id="exampleModalLabel">Notification</h2>
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                       <span aria-hidden="true">&times;</span>
+                   </button>
+               </div>            
+               <div class="modal-body">
+					<div id="suggestPostWindow">
+						<h3 class="post-title">There is a new Job Post </h3>
+						<input type="button" class="btn bg-primary" id="btnSeeNewPost" value="See new Posts">
+					</div>
+               </div>
+           </div>
+         </div>
+     </div>
+	<!-- Notification  -->
+
+
+
 </body>
 </html>

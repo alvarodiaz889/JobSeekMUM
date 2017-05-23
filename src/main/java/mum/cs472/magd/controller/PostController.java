@@ -138,8 +138,9 @@ public class PostController {
 	}
 	
 	@RequestMapping(value="/deletePost")
-	public String deletePost(HttpServletRequest request, Model model, 
-			@RequestParam("postId") String postId){
+	public void deletePost(HttpServletRequest request, Model model, HttpServletResponse response,
+			@RequestParam("postId") String postId
+			) throws IOException{
 		
 		boolean flag = false;
 		try{
@@ -151,7 +152,7 @@ public class PostController {
 				model.addAttribute("msg", "Error deleting post");
 			}
 		}catch(Exception ex){}
-		return "home";
+		response.getWriter().write("{ \"data\":\"ok\" }"); 
 	}
 	
 	@RequestMapping(value ="/listMyPosts")

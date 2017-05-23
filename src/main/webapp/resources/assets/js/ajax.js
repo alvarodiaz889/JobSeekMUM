@@ -5,26 +5,50 @@
 var totalPosts = 0;
 $(function(){
 	
-	//Count post
+	/*
+	 * Reload Post and MyPosts
+	 */
+	function reloadPosts(){
+		//Reload MyPosts
+		$('#panel3').empty();
+		getMyPosts();
+		//Reload Posts
+		$('#panel2').empty();
+		getPosts();
+	}
+	
+	/*
+	 * Count Post and Show Notification
+	 */
 	function countPost(){
 		$.get("/JobSeekMum/countPosts")
 			.done(function(data){
 				data = JSON.parse(data).data;
 				
 				if(totalPosts != "0"){
-					if(totalPosts != data[0].value){
+					if(totalPosts < data[0].value){
 						console.log("New Post" + data[0].value + " Previous: " + totalPosts);
-						//$(".notification-show")
+						//Show notification
+						$('#notificationWindow').modal('show');
 					}
 				}
 				totalPosts = data[0].value;
 				console.log("Total Post: " + totalPosts);
 			});
 	}
-	
+	//Set Interval to show notification
 	setInterval(countPost, 5000);
 	
-	function showMessage(msg){
+	$("#btnSeeNewPost").click(function(){
+		$('#notificationWindow').modal('hide');
+		reloadPosts();
+	});
+	
+	/*
+	 * Show messages
+	 */
+	function showMessage(msg, source){
+		console.log(source);
 		$("#messageSpace").empty();
 		$("#messageSpace").fadeIn("slow");
 		$("#messageSpace").append(msg);
@@ -84,17 +108,14 @@ $(function(){
 			},
 		}).done(function(){
 			showMessage(successMsg);
-			//Reload MyPosts
-			$('#panel4').empty();
-			getMyPosts();
-			//Reload Posts
-			$('#panel2').empty();
-			getPosts();
-		}).fail(showMessage(errorMsg));
+			reloadPosts();
+		}).fail(function(){
+			showMessage(errorMsg,"Error Create My Post");
+		})
 	}
 	
 	//Delete MyPost
-	$('#panel4').on('click', '.delete-post-btn', function() {
+	$('#panel3').on('click', '.delete-post-btn', function() {
 		var postId = $(this).attr("postid");
 		$.ajax("/JobSeekMum/deletePost",{
 			"type"	:"POST",
@@ -103,19 +124,21 @@ $(function(){
 					  },
 		}).done(function(){
 			showMessage(successMsg);
-			//Reload MyPosts
-			$('#panel4').empty();
-			getMyPosts();
-			//Reload Posts
-			$('#panel2').empty();
-			getPosts();
+			console.log("Delete post");
+			reloadPosts();
 		})
-		  .fail(showMessage(errorMsg));
+		  .fail(function(){
+			  showMessage(errorMsg, "Error Delete My Post");
+		  })
 	});
 	
 	//Get MyPosts
 	function getMyPosts() {		
-		$.get("/JobSeekMum/listMyPosts").done(retrieveMyPosts).fail(showMessage(errorMsg));
+		$.get("/JobSeekMum/listMyPosts")
+		.done(retrieveMyPosts)
+		.fail(function(){
+			showMessage(errorMsg, "Error get my post");
+		})
 	}
 	
 	function retrieveMyPosts(data) {
@@ -201,13 +224,18 @@ $(function(){
 		$(three).html(threeImg).append(threep1).append(threep2).append(threep3);
 		$(limit).html(threepTwop).append(readMore);
 		$(threeTwo).html(threepTwoh3).append(threepTwoh4).append(limit).append(twoTwo).append(twoThree).append(twoFour);
-	
-		$('#panel4').append(main);
+
+		$('#panel3').append(main);
+
 	}
 }
 	//Get Comments
 	function getMyPosts() {		
-		$.get("/JobSeekMum/listMyPosts").done(retrieveMyPosts).fail(showError);
+		$.get("/JobSeekMum/listMyPosts")
+		.done(retrieveMyPosts)
+		.fail(function(){
+			showMessage(errorMsg, "Error get comments");
+		})
 	}
 	/*
 	 * SuggetsPost Btn from post 
@@ -233,7 +261,9 @@ $(function(){
 			});
 			$("#listUserToSug").append(listitems);
 		})
-		  .fail(showMessage(errorMsg));
+		  .fail(function(){
+			  showMessage(errorMsg, "Error suggest post");
+		  })
 	});
 	
 	//Action of Suggest Btn in Window
@@ -250,7 +280,9 @@ $(function(){
 				"toUserId": userId
 			},
 		}).done($("#messageSpace").append(successMsg))
-		  .fail(showMessage(errorMsg));
+		  .fail(function(){
+			  showMessage(errorMs, "Error suggest post window");
+		  })
 	});
 	
 	
@@ -265,7 +297,11 @@ $(function(){
 		console.log(data);
 	});
 	function getPosts() {		
-		$.get("/JobSeekMum/listUserPosts").done(retrievePosts).fail(showMessage(errorMsg));
+		$.get("/JobSeekMum/listUserPosts")
+			.done(retrievePosts)
+			.fail(function(){
+				showMessage(errorMsg, "Error Get Posts");
+			})
 	}
 	function retrievePosts(data) {
 		let postArr = JSON.parse(data).data; 
@@ -359,7 +395,7 @@ $(function(){
 	}
 	//get Comments
 	function getComments(pid) {				
-		$.post("/JobSeekMum/viewComment",{"postId":pid}).done(function(data) {console.log(data);return data});//.fail(showError);		
+		$.post("/JobSeekMum/viewComment",{"postId":pid}).done(function(data) {console.log(data);return data});//.fail(showMessage(errorMsg));		
 	}	
 	
 	$('.tab-link').click(function(e){
@@ -522,7 +558,9 @@ $(function(){
 				"postId": postId
 			},
 		}).done($("#messageSpace").append(successMsg))
-		  .fail(showMessage(errorMsg));
+		  .fail(function(){
+			  showMessage(errorMsg, "Error Add suggest post");
+		  })
 	}
 	
 	function listSuggestedPosts(){
@@ -530,13 +568,14 @@ $(function(){
 		$.ajax("/JobSeekMum/listSuggestPost",{
 			"type":"POST"
 		}).done(showSuggestedPosts)
-		  .fail(showMessage(errorMsg));
+		  .fail(function(){
+			  showMessage(errorMsg, "Error list suggeted posts");
+		  })
 	}
-	
+	//Show suggested posts
 	function showSuggestedPosts(data){
 		var dataDisplay = "";
 		let postArr = JSON.parse(data).data;
-		console.log(postArr);
 		for (let x in postArr){
 			var aJob = $("<a/>",{
 				class: "bold",
@@ -598,7 +637,9 @@ $(function(){
 			}
 		})
 		.done(saveLikeSuccess)
-		  .fail(showMessage(errorMsg));			
+		  .fail(function(){
+			  showMessage(errorMsg, "Error save link");			
+		  })
 	}
 
 		
@@ -611,7 +652,9 @@ $(function(){
 				"likeId": likeId
 			}
 		}).done(removeLikeSuccess)
-		  .fail(showMessage(errorMsg));
+		  .fail(function(){
+			  showMessage(errorMsg, "Error remove link");
+		  })
 	}
 	
 	function updateLikes(postId)
@@ -624,7 +667,9 @@ $(function(){
 			}
 		})
 		.done(updateLikesSuccess)
-		  .fail(showMessage(errorMsg));			
+		  .fail(function(){
+			  showMessage(errorMsg, "Error update link");			
+		  })
 	}
 	
 	//--callbacks--
