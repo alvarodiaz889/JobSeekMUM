@@ -536,9 +536,13 @@ body {
 }
 
 #image{
-	margin: auto;
-	width: 200px;
-	overflow: hidden;
+	text-align: center;
+}
+
+
+#image  img {
+    display : block;
+    margin : auto;
 }
 /*weather*/
 	body{
