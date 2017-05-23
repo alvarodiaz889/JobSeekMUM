@@ -30,37 +30,37 @@
 	</form>
 	
 	<hr>
-	<h3></h3>
+	<h3  class="grey-txt"></h3>
 	<img />
 	<p></p>
 </div>
 <div id="map-container">
-	<h1>WEATHER FORECAST</h1>
+	<h1 class="grey-txt">WEATHER FORECAST</h1>
 	<div id='map-canvas'>
 	</div>
 	<div id='itemscontainer'>
 		<div class='myclass' id='first'>
-			<h3></h3>
+			<h3  class="grey-txt"></h3>
 			<img />
 			<p></p>
 		</div>
 		<div class='myclass' id='second'>
-			<h3></h3>
+			<h3  class="grey-txt"></h3>
 			<img />
 			<p></p>
 		</div>
 		<div class='myclass' id='third'>
-			<h3></h3>
+			<h3  class="grey-txt"></h3>
 			<img />
 			<p></p>
 		</div>
 		<div class='myclass' id='fourth'>
-			<h3></h3>
+			<h3  class="grey-txt"></h3>
 			<img />
 			<p></p>
 		</div>
 		<div class='myclass' id='fifth'>
-			<h3></h3>
+			<h3  class="grey-txt"></h3>
 			<img />
 			<p></p>
 		</div>
