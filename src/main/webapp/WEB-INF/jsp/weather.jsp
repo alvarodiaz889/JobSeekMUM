@@ -16,8 +16,8 @@
 	<form>
 		<p>UNITS:</p>
 		<label>
-			<input id="zipCode" type="hidden" value="${userInfo[0].zipCode}">
-			<input id="cityName" type="hidden" value="${userInfo[0].city}">
+			<input id="zipCo" type="hidden" value="${userInfo[0].zipCode}">
+			<input id="cityNa" type="hidden" value="${userInfo[0].city}">
 		</label>
 		<label><input type="radio" name="grades" value="metric" checked> Celcius</label>
 		<label><input type="radio" name="grades" value="imperial"> Fahrenheit</label>
