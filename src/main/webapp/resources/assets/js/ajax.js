@@ -781,31 +781,30 @@ $(function(){
 		}
 	}
 	
+	
 	/*
 	 * Profile Window
 	 */
-	$("#myProfile").click(function(){
-		$('#profile').modal('show');
-		$.ajax("/JobSeekMum/viewUserProfile",{
-			"type":"POST"
-		}).done(function(data){
-			data = JSON.parse(data);
-			console.log(data);
-			$("#fullName").val(data[0].fullname);
-			$("#gender").val(data[0].gender);
-			$("#birthYear").val(data[0].birthyear);
-			$("#state").val(data[0].state);
-			$("#city").val(data[0].city);
-			$("#street").val(data[0].street);
-			$("#zipCode").val(data[0].zipcode);
-			$("#email").val(data[0].email);
-		}).fail(function(){
-			showMessage(errorMsg,"Error Create My Post");
-		})
-		
-		
-		
-	});
+//	$("#profileWindow").click(function(){
+//		
+//		$.ajax("/JobSeekMum/viewUserProfile",{
+//			"type":"POST"
+//		}).done(function(data){
+//			data = JSON.parse(data);
+//			console.log(data);
+//			$("#fullName").val(data[0].fullname);
+//			$("#gender").val(data[0].gender);
+//			$("#birthYear").val(data[0].birthyear);
+//			$("#state").val(data[0].state);
+//			$("#city").val(data[0].city);
+//			$("#street").val(data[0].street);
+//			$("#zipCode").val(data[0].zipcode);
+//			$("#email").val(data[0].email);
+//		}).fail(function(){
+//			showMessage(errorMsg,"Error Create My Post");
+//		})
+//
+//	});
 	
 	
 });
