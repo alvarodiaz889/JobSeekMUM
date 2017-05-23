@@ -65,17 +65,18 @@ public class UserController {
 	}
 	
 	@RequestMapping(value ="viewUserProfile")
-	public String getUserProfile(HttpServletRequest request, Model model, @RequestParam("userId") String userId){
-		
+	public void getUserProfile(HttpServletRequest request, Model model,
+			HttpServletResponse response) throws IOException{
+		String userId = (String)request.getSession(true).getAttribute("userId");
 		List<User> userList = new ArrayList<>();
-		try{
 		userList=userService.userProfile(userId);
-		if(userList.size()>0 && null!= userList){
-			model.addAttribute("userList", userList);
-		}
-		}catch(Exception ex){
-			model.addAttribute("msg", "Something went wrong ! :( :( ");
-		}
-		return "userProfile";
+		String json =  "" ; 
+		json =new Gson().toJson(userList);
+		response.getWriter().write(json); 
+	}
+	
+	@RequestMapping(value="viewWeather")
+	public String viewWeather(HttpServletRequest request, Model model){
+		return "weather";
 	}
 }

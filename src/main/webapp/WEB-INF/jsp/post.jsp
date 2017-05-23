@@ -2,6 +2,9 @@
     pageEncoding="ISO-8859-1"%>
    
 	<section class="bg-primary" id="posts">
+		<p id="replyObj1" style="display:none" ></p>
+		<p id="replyObj2" style="display:none" ></p>
+		<p id="replyObj3" style="display:none" ></p>
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center posts">
