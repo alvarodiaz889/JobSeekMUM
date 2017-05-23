@@ -224,8 +224,8 @@ $(function(){
 		$(limit).html(threepTwop).append(readMore);
 		$(threeTwo).html(threepTwoh3).append(threepTwoh4).append(limit).append(twoTwo).append(twoThree).append(twoFour);
 
-		$('#panel3').append(main);
 
+		$('#panel3').append(main);
 	}
 }
 	//Get Comments
@@ -307,7 +307,11 @@ $(function(){
 	}
 	function retrievePosts(data) {
 		let postArr = JSON.parse(data).data; 
+		let ids = "";
 		for (let x in postArr){
+			
+			ids += postArr[x].postid + ',';
+									
 			let limit = $('<div>', { class : 'limit-text' });
 			let main = $('<div>', { class : 'post-wrapper' });
 			let one = $('<div>', { class : 'row' });
@@ -345,11 +349,30 @@ $(function(){
 				class	:	'post-desc',
 				text	:	 postArr[x].post
 			});
+			
+			/*likes*/
+			let twoTwoA = $('<a>', {
+				'data-toggle'	:	'tooltip',
+				id				:	postArr[x].postid + '_a',
+				href			: 	"#",
+				class			:	"anchorImage"
+			});			
 			let twoTwoImg = $('<img>', {
-				alt		:	'like image',
-				src		:	imagePath + 'like.png'
+				alt		:	'like',
+				src		:	imagePath + 'like.png',
+				id		:	postArr[x].postid + '_img'
+			});			
+			let twoTwoInput = $('<input>', {
+				type	:	'hidden',
+				id		:	postArr[x].postid + '_input'
+			});			
+			let twoTwoSpan = $('<span>', {
+				class 	: 'grey-txt', 
+				text 	: '0',
+				id		:	postArr[x].postid + '_span'
 			});
-			let twoTwoSpan = $('<span>', {class : 'grey-txt', text : '30'});
+			/*likes*/
+			
 			let twoThreea = $('<a>', {
 				class		:	'view-comments italic', 
 				'href'		: 	'#', 
@@ -374,16 +397,13 @@ $(function(){
 				'value' : 	postArr[x].postid
 			});		
 			//getComments(1)
-			
-//			for (let c in com){
-//				console.log(com[c](0));
-//			};
 
-			
+			$(twoTwoA).append(twoTwoImg);
+
 			$(main).html(one).append(hiddenPostid);
 			$(one).html(two);
 			$(two).html(three).append(threeTwo);
-			$(twoTwo).html(twoTwoImg).append(twoTwoSpan);
+			$(twoTwo).html(twoTwoA).append(twoTwoSpan).append(twoTwoInput);
 			$(twoThree).html(twoThreea);
 			$(twoFour).html(twoFourbtn);
 			$(three).html(threeImg).append(threep1).append(threep2).append(threep3);
@@ -393,7 +413,12 @@ $(function(){
 
 			$('#profileLink').attr('id', postArr[x].userid);
 			$('#panel2').append(main);
+
 		}
+		
+		$('#replyObj').text(ids);
+		setLikes();
+		
 	}
 	//get Comments
 	function getComments(pid) {				
@@ -607,25 +632,50 @@ $(function(){
 
 	
 	/******** LIKES *********/
-	$("#likeImg").click(function(){
-		
-		var action = $("#likeImg").attr("alt");
-		var userId = 4;
-		var postId = 1;
-		var likeId = $("#likeId").val();
-		//alert(action);	
+	function setLikes()
+	{
+		//alert('setLikes');
+		let ids = $('#replyObj').text().split(',');
+		if(ids.length > 0)
+		{
+			console.log(ids);
+			for(let i in ids)
+			{
+				if(ids[i] != '')
+				{
+					let id_a = ids[i] + '_a';
+					let id_input = ids[i] + '_input';
+					let id_img = ids[i] + '_img';
+					
+					getLikePerUserPost(ids[i]);
+					updateLikes(ids[i]);//# of likes and names 
+					
+					$("#" +id_a).click(function(){
+						likeUnlikePost(id_img,ids[i],id_input);						
+						return false;
+					});
+				}
+			}
+		}
+	}
+	
+	
+	function likeUnlikePost(id_img,postId,id_input)
+	{
+		var action = $("#"+id_img).attr("alt");
+		var likeId = $("#" +id_input ).val();
+		//alert(action);
 		if(action === "like")
 		{
 			saveLike(postId);
 		}
 		else
 		{
-			removeLike(likeId);				
+			removeLike(likeId,postId);				
 		}	
-		setTimeout(function(){ updateLikes(postId); }, 1000);	
-		
-	});
-	
+		setTimeout(function(){ updateLikes(postId); }, 1000);
+	}
+	//**1**----------- ajax call
 	function saveLike(postId)
 	{
 		$.ajax("/JobSeekMum/setLike",{
@@ -635,15 +685,25 @@ $(function(){
 				"postId": postId
 				
 			}
-		})
-		.done(saveLikeSuccess)
-		  .fail(function(){
-			  showMessage(errorMsg, "Error save link");			
-		  })
+		}).done(function(a,b,c){saveLikeSuccess(a,b,c,postId);})
+		  .fail(showError);			
 	}
+	//------------callback------
+	function saveLikeSuccess(data,b,c,postId)
+	{
+		//alert('saveLikeSuccess');
+		let id = JSON.parse(data).data[0].likeid;
+		$("#" + postId + "_input" ).val(id);
+		$("#" + postId + "_img").attr("alt","unlike");
+		let src = $("#" + postId + "_img").attr("src").toString();
+		src = src.replace("like.png","like2.png");
+		$("#" + postId + "_img").attr("src",src);
+	}
+	//-----------------------------
+	
+	//**2**----------- ajax call
+	function removeLike(likeId,postId)
 
-		
-	function removeLike(likeId)
 	{
 		$.ajax("/JobSeekMum/unLike",{
 			"type":"POST",
@@ -651,12 +711,22 @@ $(function(){
 			"data": { 
 				"likeId": likeId
 			}
-		}).done(removeLikeSuccess)
-		  .fail(function(){
-			  showMessage(errorMsg, "Error remove link");
-		  })
+
+		}).done(function(a,b,c){removeLikeSuccess(a,b,c,likeId,postId)})
+		  .fail(showError);
+
 	}
+	//------------callback------
+	function removeLikeSuccess(data,b,c,likeId,postId)
+	{
+		$("#" + postId + "_input" ).val("");
+		$("#" + postId + "_img").attr("alt","like");
+		let src = $("#" + postId + "_img").attr("src").toString();
+		src = src.replace("like2.png","like.png");
+		$("#" + postId + "_img").attr("src",src);
+	}	
 	
+	//**3**----------- ajax call
 	function updateLikes(postId)
 	{
 		$.ajax("/JobSeekMum/getLikes",{
@@ -666,35 +736,12 @@ $(function(){
 				"postId": postId
 			}
 		})
-		.done(updateLikesSuccess)
-		  .fail(function(){
-			  showMessage(errorMsg, "Error update link");			
-		  })
+		.done(function(a,b,c){updateLikesSuccess(a,b,c,postId)})
+		  .fail(showError);			
+
 	}
-	
-	//--callbacks--
-	function saveLikeSuccess(data)
-	{
-		console.log(data);
-		let id = JSON.parse(data).data[0].likeid;
-		$("#likeId").val(id);
-		$("#likeImg").attr("alt","unlike");
-		let src = $("#likeImg").attr("src").toString();
-		src = src.replace("like.png","like2.png");
-		$("#likeImg").attr("src",src);
-	}
-	
-	function removeLikeSuccess()
-	{
-		$.ajaxSetup({ cache: false });
-		$("#likeId").val("");
-		$("#likeImg").attr("alt","like");
-		let src = $("#likeImg").attr("src").toString();
-		src = src.replace("like2.png","like.png");
-		$("#likeImg").attr("src",src);
-	}
-	
-	function updateLikesSuccess(data)
+	//------------callback------
+	function updateLikesSuccess(data,b,c,postId)
 	{
 		var users = JSON.parse(data).data;
 		var usersNames="";
@@ -702,8 +749,36 @@ $(function(){
 		{
 			usersNames += users[obj].fullname + '\n';
 		}
-		$("#likeTxt").text(users.length);
-		$("#likeLink").attr("title",usersNames);
+		$("#" + postId + "_span" ).text(users.length);
+		$("#" + postId + "_a").attr("title",usersNames);
+	}
+	//---------------------------
+	
+	//**4**----------- ajax call
+	function getLikePerUserPost(postId)
+	{
+		$.ajax("/JobSeekMum/getLikePerUserPost",{
+			"type":"POST",
+			"async": "false",
+			"data": { 
+				"postId": postId
+			}
+		}).done(function(a,b,c){getLikePerUserPostSuccess(a,b,c,postId)})
+		  .fail(showError);			
+	}	
+	//------------callback------
+	function getLikePerUserPostSuccess(data,b,c,postId)
+	{		
+		//alert('getLikePerUserPostSuccess' + data);
+		let objData = JSON.parse(data).data;
+		if(objData.length > 0)
+		{
+			$("#" + postId + "_input").val(data.likeid);
+			$("#" + postId + "_img").attr("alt","unlike");			
+			let src = $("#" + postId + "_img").attr("src").toString();			
+			src = src.replace("like.png","like2.png");
+			$("#" + postId + "_img").attr("src",src);
+		}
 	}
 	
 	/*

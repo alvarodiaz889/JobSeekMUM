@@ -2,6 +2,8 @@
     pageEncoding="ISO-8859-1"%>
    
 	<section class="bg-primary" id="posts">
+		<p id="replyObj" style="display:none" ></p>
+		<p id="testId"  >${sessionScope.user}</p>
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center posts">
