@@ -110,6 +110,7 @@
 							</a>
 						</li>
 
+
 						<li><a class="page-scroll" href="#"><m:today /></a></li>
 					</ul>
 			</c:when></c:choose>

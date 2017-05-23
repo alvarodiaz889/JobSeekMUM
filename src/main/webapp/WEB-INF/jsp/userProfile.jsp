@@ -64,6 +64,7 @@
 								</div>
 								<div class="form-group">
 									<input type="submit" class="btn" value="Update">
+									<a class="btn weather-btn" target="_blank" href="<%=request.getContextPath() %>/viewWeather.do">Weather</a>
 								</div>
 							</form>
 						</div>

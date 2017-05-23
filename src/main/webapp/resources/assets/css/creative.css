@@ -545,51 +545,53 @@ body {
     margin : auto;
 }
 /*weather*/
-	body{
-			background:#4479ce;
-			font-family:arial;
-		}
-		
-		h1{text-align:center;}
-		
-		.myclass{
-			width:120px;
-			height:210px;
-			background:#becfea;
-			float:left;
-			margin:5px;
-			box-sizing:border-box;
-			padding: 10px;
-		}
-		
-		#actual{
-			float:right;
-			width:30%;
-			background:#becfea;
-			box-sizing:border-box;
-			padding: 10px;
-		}
-		
-		#map-canvas{
-			width:90%;
-			background:blue;
-			margin:20px auto; 
-			height:400px;
-			
-		}
-		
-		#itemscontainer{
-			width:80%;
-			background:#4479ce;
-			margin:0 auto; 
-			height:220px;
-		}
-		
-		#map-container{
-			width:70%;
-			float:left;
-		}
+body{
+	background:#F05F40;
+	font-family:arial;
+}
 
+h1{text-align:center;}
 
+.myclass{
+	width:120px;
+	height:180px;
+	background:#ff9966;
+	float:left;
+	margin:5px;
+	box-sizing:border-box;
+	padding: 10px;
+}
+
+#actual{
+	float:right;
+	width:30%;
+	background:#ff9966;
+	box-sizing:border-box;
+	padding: 10px;
+}
+
+#map-canvas{
+	width:90%;
+	background:blue;
+	margin:20px auto; 
+	height:400px;
+	
+}
+
+#itemscontainer{
+	width:80%;
+	background:#ff9966;
+	margin:0 auto; 
+	height:220px;
+}
+
+#map-container{
+	width:70%;
+	float:left;
+}
+.weather-btn {
+	background-color: beige;
+	color: #333;
+}
 
 
