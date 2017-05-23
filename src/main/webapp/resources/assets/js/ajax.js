@@ -221,7 +221,7 @@ $(function(){
 }
 	//Get Comments
 	function getMyPosts() {		
-		$.get("/JobSeekMum/listMyPosts").done(retrieveMyPosts).fail(showError);
+		$.get("/JobSeekMum/listMyPosts").done(retrieveMyPosts).fail(showMessage(errorMsg));
 	}
 	/*
 	 * SuggetsPost Btn from post 
@@ -373,7 +373,7 @@ $(function(){
 	}
 	//get Comments
 	function getComments(pid) {				
-		$.post("/JobSeekMum/viewComment",{"postId":pid}).done(function(data) {console.log(data);return data});//.fail(showError);		
+		$.post("/JobSeekMum/viewComment",{"postId":pid}).done(function(data) {console.log(data);return data});//.fail(showMessage(errorMsg));		
 	}	
 	
 	$('.tab-link').click(function(e){
