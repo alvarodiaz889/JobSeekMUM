@@ -1,9 +1,11 @@
 (function() {
     "use strict"; // Start of use strict
     
-//    $('.post-panel').hide();  
-//    $('.post-panel:first-child').show();
-
+   
+//   $('.tab-menu').on('click', 'a', function(){
+//	   alert('a');
+//	   return false;
+//   });
     // jQuery for page scrolling feature - requires jQuery Easing plugin
     
     $(document).on('click', 'a.page-scroll', function(event) {
@@ -13,7 +15,7 @@
         }, 1250, 'easeInOutExpo');
         event.preventDefault();
     });
-
+    
      //Highlight the top nav as scrolling occurs
     $('body').scrollspy({
         target: '.navbar-fixed-top',
@@ -33,21 +35,21 @@
     })
 
     // Initialize and Configure Scroll Reveal Animation
-    window.sr = ScrollReveal();
-    sr.reveal('.sr-icons', {
-        duration: 600,
-        scale: 0.3,
-        distance: '0px'
-    }, 200);
-    sr.reveal('.sr-button', {
-        duration: 1000,
-        delay: 200
-    });
-    sr.reveal('.sr-contact', {
-        duration: 600,
-        scale: 0.3,
-        distance: '0px'
-    }, 300);
+//    window.sr = ScrollReveal();
+//    sr.reveal('.sr-icons', {
+//        duration: 600,
+//        scale: 0.3,
+//        distance: '0px'
+//    }, 200);
+//    sr.reveal('.sr-button', {
+//        duration: 1000,
+//        delay: 200
+//    });
+//    sr.reveal('.sr-contact', {
+//        duration: 600,
+//        scale: 0.3,
+//        distance: '0px'
+//    }, 300);
 
     // Initialize and Configure Magnific Popup Lightbox Plugin
     $('.popup-gallery').magnificPopup({

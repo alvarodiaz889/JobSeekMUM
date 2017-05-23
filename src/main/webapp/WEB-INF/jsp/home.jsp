@@ -60,29 +60,66 @@
                 	<li>
                 		<h5 class="msg">${msg }</h5>
                 	</li>
+                	<li>
+                		<button class="btn bg-primary space-sm" data-toggle="modal" data-target="#addPostModal">+ Add a New Post</button>
+                	</li>
                     <li>
                         <a class="page-scroll" href="#" data-toggle="modal" data-target="#loginModal">LOG IN</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#" data-toggle="modal" data-target="#signupModal">SIGN UP</a>
-                    </li> 
-                      
-                
-                <li><a class="page-scroll" href="#"><m:today/></a></li>
-                
-                                   
+                    </li>                   	
+                    <li>
+                    	<a class="page-scroll" href="#"><m:today/></a>
+                   	</li>     
                 </ul>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container-fluid -->
     </nav>
-
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-        
+	
+        <!-- Add post Modal -->
+        	<div class="modal fade"  id="addPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">        
+		            <div class="modal-content">
+		                <div class="modal-header">
+		                    <h2 class="modal-title" id="exampleModalLabel">Add a New Post</h2>
+		                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                        <span aria-hidden="true">&times;</span>
+		                    </button>
+		                </div>
+		             
+		                <div class="modal-body">
+						   <div class="form-group">
+	                			<div class="col-sm-12">
+	                				<select class="form-control  MyPostForm" id="myPostType" >
+	                					<option value="" >Select type</option>
+	                					<option value="JAVADEVELOPER" >Java Developer</option>
+	                					<option value="NETDEVELOPER">.Net Developer</option>
+	                					<option value="WEBDEVELOPER">Web Developer</option>
+	                				</select>
+	                			</div>
+	                			<div class="col-sm-12 space-sm">
+	                				<input type="text" id="myPostTitle" class="form-control MyPostForm" placeholder="Title" >
+	                				<br>
+	                			</div>
+	                			<div class="col-sm-12">
+	                				<textarea id="myPostBody" class="form-control MyPostForm"  placeholder="Text" ></textarea>
+	                			</div>
+	                			<div class="col-sm-12 space-sm">
+	                				<input type="submit" class="btn" value="Submit" id="myPostSubmit" disabled="disabled">
+	                			</div>
+	               			</div>
+						</div>
+					</div>
+				</div>        
+			</div>
+        <!-- / Add post Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">        
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title" id="exampleModalLabel">Log In</h2>
+                    <h2 class="modal-title">Log In</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
