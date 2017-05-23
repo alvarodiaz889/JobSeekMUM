@@ -45,7 +45,7 @@
 <body id="page-top">
 	<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
 	<div class="messageSpace" id="messageSpace"></div>
-	<div class="notification-show" style="display: none;"></div>
+	
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -214,6 +214,28 @@
 	<jsp:include page="post.jsp" />
 	
 	<h1>${msg }</h1>
+
+ <!-- Notification  -->    
+    <div class="modal fade" id="notificationWindow" tabindex="-1" role="dialog" aria-hidden="true">
+       <div class="modal-dialog" role="document">       
+           <div class="modal-content">
+               <div class="modal-header">
+                   <h2 class="modal-title" id="exampleModalLabel">Notification</h2>
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                       <span aria-hidden="true">&times;</span>
+                   </button>
+               </div>            
+               <div class="modal-body">
+					<div id="suggestPostWindow">
+						<h3 class="post-title">There is a new Job Post </h3>
+						<input type="button" class="btn bg-primary" id="btnSeeNewPost" value="See new Posts">
+					</div>
+               </div>
+           </div>
+         </div>
+     </div>
+	<!-- Notification  -->
+
 
 </body>
 </html>

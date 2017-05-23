@@ -6,25 +6,48 @@ var comments;
 var totalPosts = 0;
 $(function(){
 	
-	//Count post
+	/*
+	 * Reload Post and MyPosts
+	 */
+	function reloadPosts(){
+		//Reload MyPosts
+		$('#panel3').empty();
+		getMyPosts();
+		//Reload Posts
+		$('#panel2').empty();
+		getPosts();
+	}
+	
+	/*
+	 * Count Post and Show Notification
+	 */
 	function countPost(){
 		$.get("/JobSeekMum/countPosts")
 			.done(function(data){
 				data = JSON.parse(data).data;
 				
 				if(totalPosts != "0"){
-					if(totalPosts != data[0].value){
+					if(totalPosts < data[0].value){
 						console.log("New Post" + data[0].value + " Previous: " + totalPosts);
-						//$(".notification-show")
+						//Show notification
+						$('#notificationWindow').modal('show');
 					}
 				}
 				totalPosts = data[0].value;
 				console.log("Total Post: " + totalPosts);
 			});
 	}
-	
+	//Set Interval to show notification
 	setInterval(countPost, 5000);
 	
+	$("#btnSeeNewPost").click(function(){
+		$('#notificationWindow').modal('hide');
+		reloadPosts();
+	});
+	
+	/*
+	 * Show messages
+	 */
 	function showMessage(msg){
 		$("#messageSpace").empty();
 		$("#messageSpace").fadeIn("slow");
@@ -85,17 +108,12 @@ $(function(){
 			},
 		}).done(function(){
 			showMessage(successMsg);
-			//Reload MyPosts
-			$('#panel4').empty();
-			getMyPosts();
-			//Reload Posts
-			$('#panel2').empty();
-			getPosts();
+			reloadPosts();
 		}).fail(showMessage(errorMsg));
 	}
 	
 	//Delete MyPost
-	$('#panel4').on('click', '.delete-post-btn', function() {
+	$('#panel3').on('click', '.delete-post-btn', function() {
 		var postId = $(this).attr("postid");
 		$.ajax("/JobSeekMum/deletePost",{
 			"type"	:"POST",
@@ -104,12 +122,7 @@ $(function(){
 					  },
 		}).done(function(){
 			showMessage(successMsg);
-			//Reload MyPosts
-			$('#panel4').empty();
-			getMyPosts();
-			//Reload Posts
-			$('#panel2').empty();
-			getPosts();
+			reloadPosts();
 		})
 		  .fail(showMessage(errorMsg));
 	});
@@ -205,7 +218,7 @@ $(function(){
 		$(threeTwo).html(threepTwoh3).append(threepTwoh4).append(limit).append(twoTwo).append(twoThree).append(twoFour);
 	
 		//getComments();
-		$('#panel4').append(main);
+		$('#panel3').append(main);
 		console.log(postArr[x]);
 	}
 }
