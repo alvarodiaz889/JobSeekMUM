@@ -49,15 +49,14 @@ $(function(){
 	/*
 	 * Show messages
 	 */
-	function showMessage(msg){
+	function showMessage(msg, source){
+		console.log(source);
 		$("#messageSpace").empty();
 		$("#messageSpace").fadeIn("slow");
 		$("#messageSpace").append(msg);
-		setTimeout(function(){
-			$("#messageSpace").fadeOut( "slow" );
-			 
-			}
-		, 5000);
+		setTimeout(	function(){
+				$("#messageSpace").fadeOut( "slow" )
+			}, 5000);
 	}
 	
 	var successMsg = "<div class='alert alert-success'><strong>Success!</strong> </div>";
@@ -86,7 +85,7 @@ $(function(){
 		let type 	= $("#myPostType").val();
 		let body 	= $("#myPostBody").val();
 		let title 	= $("#myPostTitle").val();
-		console.log(type+" "+body+" "+title);
+		//console.log(type+" "+body+" "+title);
 		if(type != "" && body != "" && title != ""){
 			$("#myPostSubmit").attr('disabled', false);
 		}
@@ -109,8 +108,11 @@ $(function(){
 			},
 		}).done(function(){
 			showMessage(successMsg);
+			myPostCleanMsg();
 			reloadPosts();
-		}).fail(showMessage(errorMsg));
+		}).fail(function(){
+			showMessage(errorMsg,"Error Create My Post");
+		})
 	}
 	
 	//Delete MyPost
@@ -123,14 +125,21 @@ $(function(){
 					  },
 		}).done(function(){
 			showMessage(successMsg);
+			console.log("Delete post");
 			reloadPosts();
 		})
-		  .fail(showMessage(errorMsg));
+		  .fail(function(){
+			  showMessage(errorMsg, "Error Delete My Post");
+		  })
 	});
 	
 	//Get MyPosts
 	function getMyPosts() {		
-		$.get("/JobSeekMum/listMyPosts").done(retrieveMyPosts).fail(showMessage(errorMsg));
+		$.get("/JobSeekMum/listMyPosts")
+		.done(retrieveMyPosts)
+		.fail(function(){
+			showMessage(errorMsg, "Error get my post");
+		})
 	}
 	
 	function retrieveMyPosts(data) {
@@ -223,7 +232,11 @@ $(function(){
 }
 	//Get Comments
 	function getMyPosts() {		
-		$.get("/JobSeekMum/listMyPosts").done(retrieveMyPosts).fail(showMessage(errorMsg));
+		$.get("/JobSeekMum/listMyPosts")
+		.done(retrieveMyPosts)
+		.fail(function(){
+			showMessage(errorMsg, "Error get comments");
+		})
 	}
 	/*
 	 * SuggetsPost Btn from post 
@@ -249,7 +262,9 @@ $(function(){
 			});
 			$("#listUserToSug").append(listitems);
 		})
-		  .fail(showMessage(errorMsg));
+		  .fail(function(){
+			  showMessage(errorMsg, "Error suggest post");
+		  })
 	});
 	
 	//Action of Suggest Btn in Window
@@ -258,15 +273,20 @@ $(function(){
 		var userId = $("#listUserToSug").val()
 		var postId = $("#idPostSug").val(); 
 			
-		console.log("Attribute postId:" + postId + " user: " + userId);
+		//console.log("Attribute postId:" + postId + " user: " + userId);
 		$.ajax("/JobSeekMum/addSuggestPost",{
 			"type":"POST",
 			"data": { 
 				"postId": postId,
 				"toUserId": userId
 			},
-		}).done($("#messageSpace").append(successMsg))
-		  .fail(showMessage(errorMsg));
+		}).done(function(){
+			$('#suggestModal').modal('hide');
+			$("#messageSpace").append(successMsg);
+		})
+		  .fail(function(){
+			  showMessage(errorMs, "Error suggest post window");
+		  })
 	});
 	
 	
@@ -277,7 +297,11 @@ $(function(){
 	 */
 	
 	function getPosts() {		
-		$.get("/JobSeekMum/listUserPosts").done(retrievePosts).fail(showMessage(errorMsg));
+		$.get("/JobSeekMum/listUserPosts")
+			.done(retrievePosts)
+			.fail(function(){
+				showMessage(errorMsg, "Error Get Posts");
+			})
 	}
 	
 	function retrievePosts(data) {
@@ -479,15 +503,13 @@ $(function(){
 
 	
 	function myPostCleanMsg(){
-		//Add message Todo
-		$("#messageSpace").append(successMsg);
-		setTimeout($("#messageSpace").append(""), 5000);
-		
 		 $("#myPostType").val('');
 		 $("#myPostBody").val('');
 		 $("#myPostTitle").val('');
+		 
 		 $("#myPostSubmit").attr('disabled','disabled');
-		alert("Insert ok");
+		 $("#addPostModal").modal('hide');
+
 	}
 	
 	/*
@@ -503,7 +525,9 @@ $(function(){
 				"postId": postId
 			},
 		}).done($("#messageSpace").append(successMsg))
-		  .fail(showMessage(errorMsg));
+		  .fail(function(){
+			  showMessage(errorMsg, "Error Add suggest post");
+		  })
 	}
 	
 	function listSuggestedPosts(){
@@ -511,13 +535,14 @@ $(function(){
 		$.ajax("/JobSeekMum/listSuggestPost",{
 			"type":"POST"
 		}).done(showSuggestedPosts)
-		  .fail(showMessage(errorMsg));
+		  .fail(function(){
+			  showMessage(errorMsg, "Error list suggeted posts");
+		  })
 	}
-	
+	//Show suggested posts
 	function showSuggestedPosts(data){
 		var dataDisplay = "";
 		let postArr = JSON.parse(data).data;
-		console.log(postArr);
 		for (let x in postArr){
 			var aJob = $("<a/>",{
 				class: "bold",
@@ -579,7 +604,9 @@ $(function(){
 			}
 		})
 		.done(saveLikeSuccess)
-		  .fail(showMessage(errorMsg));			
+		  .fail(function(){
+			  showMessage(errorMsg, "Error save link");			
+		  })
 	}
 
 		
@@ -592,7 +619,9 @@ $(function(){
 				"likeId": likeId
 			}
 		}).done(removeLikeSuccess)
-		  .fail(showMessage(errorMsg));
+		  .fail(function(){
+			  showMessage(errorMsg, "Error remove link");
+		  })
 	}
 	
 	function updateLikes(postId)
@@ -605,7 +634,9 @@ $(function(){
 			}
 		})
 		.done(updateLikesSuccess)
-		  .fail(showMessage(errorMsg));			
+		  .fail(function(){
+			  showMessage(errorMsg, "Error update link");			
+		  })
 	}
 	
 	//--callbacks--
