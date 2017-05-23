@@ -77,8 +77,6 @@ public class UserController {
 	
 	@RequestMapping(value="viewWeather")
 	public String viewWeather(HttpServletRequest request, Model model){
-		String url = "";
-		url = "test";
 		return "weather";
 	}
 }

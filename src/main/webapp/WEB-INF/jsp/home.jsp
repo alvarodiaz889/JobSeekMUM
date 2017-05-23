@@ -103,11 +103,14 @@
 								data-target="#addPostModal">+ Add a New Post</button>
 						</li>
 						<li><a class="page-scroll" href="<%=request.getContextPath()%>/signOut.do">LOG OUT</a></li>
-						<li><a class="page-scroll" href="#" class="profileLink"
-							title="My Profile" id="profileAction"> <img alt="profile link image"
-								class="img-circle"
-								src="<%=request.getContextPath() %>/resources/images/user.jpg">
-						</a></li>
+
+						<li>
+							<a class="page-scroll profile-link" href="#" title="My Profile"> 
+								<img alt="profile link image" class="img-circle" src="<%=request.getContextPath() %>/resources/images/user.jpg">
+							</a>
+						</li>
+
+
 						<li><a class="page-scroll" href="#"><m:today /></a></li>
 					</ul>
 			</c:when></c:choose>

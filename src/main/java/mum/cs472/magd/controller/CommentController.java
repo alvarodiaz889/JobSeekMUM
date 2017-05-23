@@ -25,7 +25,7 @@ public class CommentController {
 	private CommentService commentService;
 	
 	@RequestMapping("/viewComment")
-	public void viewComments(HttpServletRequest request, Model model, HttpServletResponse response, @RequestParam("postId") String postId){
+	public void viewComments(HttpServletRequest request, Model model, HttpServletResponse response, @RequestParam("postId") String postId) throws IOException{
 		
 		List<Comment> comments = new ArrayList<>();
 		try{
@@ -44,12 +44,13 @@ public class CommentController {
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
+		//response.getWriter().write("{ \"data\":\"ok\" }"); 
 
 	}
 	
 	@RequestMapping("/addComment")
-	public String addComment(HttpServletRequest request, Model model, 
-			Comment comment,@RequestParam("postId") String postId){
+	public void addComment(HttpServletRequest request, Model model, 
+			@RequestParam("postId") String postId,@RequestParam("comment") String comment){
 		
 		boolean flag  = false;
 		String userId = (String)request.getSession(true).getAttribute("userId");
@@ -62,7 +63,7 @@ public class CommentController {
 			model.addAttribute("msg", "Error adding Comment");
 		}
 		}catch(Exception ex){ex.printStackTrace();}
-		return "home";
+		
 	}
 	
 	@RequestMapping(value="/deleteComment")

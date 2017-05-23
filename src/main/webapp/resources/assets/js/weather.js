@@ -7,8 +7,9 @@
 			$.ajaxSetup({ cache: false });	
 			let city = 'fairfield';
 			
-			
-			showWeather('fairfield','52557','metric');
+			var zipCode = $('#zipCode').val();
+			var cityName = $('#cityName').val();
+			showWeather(cityName,zipCode,'metric');
 			
 			// get location button functionality
 			$("#submitBtn").click(function(event){

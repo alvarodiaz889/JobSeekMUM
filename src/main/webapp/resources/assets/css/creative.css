@@ -526,13 +526,13 @@ body {
 #addPostModal .modal-body {
     min-height: 250px;
 }
-.profileLink img {
+.profile-link .img-circle{
 	width : 40px;
 	border: 2px solid #F05F40;
 }
-
-.img-circle{
-	width: 35px;
+#postDesc{
+    background-color: #fff;
+    padding: 10px;
 }
 
 #image{
@@ -544,9 +544,51 @@ body {
     display : block;
     margin : auto;
 }
-
-
-
+/*weather*/
+	body{
+			background:#4479ce;
+			font-family:arial;
+		}
+		
+		h1{text-align:center;}
+		
+		.myclass{
+			width:120px;
+			height:210px;
+			background:#becfea;
+			float:left;
+			margin:5px;
+			box-sizing:border-box;
+			padding: 10px;
+		}
+		
+		#actual{
+			float:right;
+			width:30%;
+			background:#becfea;
+			box-sizing:border-box;
+			padding: 10px;
+		}
+		
+		#map-canvas{
+			width:90%;
+			background:blue;
+			margin:20px auto; 
+			height:400px;
+			
+		}
+		
+		#itemscontainer{
+			width:80%;
+			background:#4479ce;
+			margin:0 auto; 
+			height:220px;
+		}
+		
+		#map-container{
+			width:70%;
+			float:left;
+		}
 
 
 
