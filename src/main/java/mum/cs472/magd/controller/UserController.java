@@ -74,4 +74,11 @@ public class UserController {
 		json =new Gson().toJson(userList);
 		response.getWriter().write(json); 
 	}
+	
+	@RequestMapping(value="viewWeather")
+	public String viewWeather(HttpServletRequest request, Model model){
+		String url = "";
+		url = "test";
+		return "weather";
+	}
 }
