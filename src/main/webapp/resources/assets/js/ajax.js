@@ -63,8 +63,15 @@ $(function(){
 				"postText"	: body,
 				"postTitle"	: title
 			},
-		}).done(myPostCleanMsg)
-		  .fail(showMessage(errorMsg));
+		}).done(function(){
+			showMessage(successMsg);
+			//Reload MyPosts
+			$('#panel4').empty();
+			getMyPosts();
+			//Reload Posts
+			$('#panel2').empty();
+			getPosts();
+		}).fail(showMessage(errorMsg));
 	}
 	
 	//Delete MyPost
