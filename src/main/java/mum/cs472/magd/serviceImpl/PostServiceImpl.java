@@ -66,7 +66,8 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public List listUserPosts() {
 		List posts = new ArrayList();
-		String query = "SELECT * FROM POSTS P, USERS U " +
+		String query = "SELECT P.*, U.FULLNAME, U.GENDER, U.STATE, U.CITY, U.STREET, U.ZIPCODE, U.EMAIL "
+						+ "FROM POSTS P, USERS U " +
 						"WHERE P.USERID = U.USERID " +
 						"ORDER BY P.DATECREATED DESC ";
 		posts = dao.getData(query);
@@ -75,7 +76,8 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public List getMyPosts(String userId) {
 		List posts = new ArrayList();
-		String query = "SELECT * FROM POSTS P, USERS U " +
+		String query = "SELECT P.*, U.FULLNAME, U.GENDER, U.STATE, U.CITY, U.STREET, U.ZIPCODE, U.EMAIL "
+					+ "FROM POSTS P, USERS U " +
 						"WHERE P.USERID = U.USERID AND P.USERID = ? " +
 						" ORDER BY P.DATECREATED DESC ";
 		posts = dao.getData(query, new Object[]{userId});
