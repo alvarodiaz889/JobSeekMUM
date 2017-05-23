@@ -880,7 +880,7 @@ $(function(){
 	/*
 	 * Profile Window
 	 */
-	$("#profileAction").click(function(){
+	$(".profile-link").click(function(){
 		$('#profileWindow').modal('show');
 		$.ajax("/JobSeekMum/viewUserProfile",{
 			"type":"POST"
