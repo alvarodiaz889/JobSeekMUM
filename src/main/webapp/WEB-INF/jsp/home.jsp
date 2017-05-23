@@ -256,11 +256,11 @@
 								</div>
 								<div class="form-group">
 									<input type="password" id="loginPw" class="form-control"
-										name="password" placeholder="Enter Password Here.." required>
+							name="password" placeholder="Enter Password Here.." required ="required"  pattern ="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$" title="Password should be 6 character or more and should have atleast one capital,one small letter and one digit">
 								</div>
 								<div class="form-group">
 									<input type="password" id="loginPwConf" class="form-control"
-										name="confPassword" placeholder="Confirm Password.." required>
+										name="confPassword" placeholder="Confirm Password.." required ="required" pattern ="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$" title="Password should be 6 character or more and should have atleast one capital,one small letter and one digit">
 								</div>
 								<div class="form-group">
 									<input type="submit" class="btn" value="Sign Up">
