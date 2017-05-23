@@ -19,6 +19,6 @@ public interface PostService {
 	List listUserPosts();
 	List getMyPosts(String userId);
 	List getPostById(String postId);
-	List countActualPost();
+	List countActualPost(String userId);
 	
 }

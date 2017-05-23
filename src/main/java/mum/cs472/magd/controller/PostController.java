@@ -180,7 +180,8 @@ public class PostController {
 		
 		List posts = new ArrayList();
 		try{ 
-			posts = postService.countActualPost();
+			String userId = (String)request.getSession(true).getAttribute("userId");
+			posts = postService.countActualPost(userId);
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}

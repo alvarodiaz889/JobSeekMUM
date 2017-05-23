@@ -83,7 +83,7 @@ $(function(){
 		let type 	= $("#myPostType").val();
 		let body 	= $("#myPostBody").val();
 		let title 	= $("#myPostTitle").val();
-		console.log(type+" "+body+" "+title);
+		//console.log(type+" "+body+" "+title);
 		if(type != "" && body != "" && title != ""){
 			$("#myPostSubmit").attr('disabled', false);
 		}
@@ -106,6 +106,7 @@ $(function(){
 			},
 		}).done(function(){
 			showMessage(successMsg);
+			myPostCleanMsg();
 			reloadPosts();
 		}).fail(function(){
 			showMessage(errorMsg,"Error Create My Post");
@@ -270,7 +271,7 @@ $(function(){
 		var userId = $("#listUserToSug").val()
 		var postId = $("#idPostSug").val(); 
 			
-		console.log("Attribute postId:" + postId + " user: " + userId);
+		//console.log("Attribute postId:" + postId + " user: " + userId);
 		$.ajax("/JobSeekMum/addSuggestPost",{
 			"type":"POST",
 			"data": { 
@@ -535,15 +536,13 @@ $(function(){
 					
 	 */
 	function myPostCleanMsg(){
-		//Add message Todo
-		$("#messageSpace").append(successMsg);
-		setTimeout($("#messageSpace").append(""), 5000);
-		
 		 $("#myPostType").val('');
 		 $("#myPostBody").val('');
 		 $("#myPostTitle").val('');
+		 
 		 $("#myPostSubmit").attr('disabled','disabled');
-		alert("Insert ok");
+		 $("#addPostModal").modal('hide');
+
 	}
 	
 	/*

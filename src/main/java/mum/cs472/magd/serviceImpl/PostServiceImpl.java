@@ -87,10 +87,10 @@ public class PostServiceImpl implements PostService {
 		return postList;
 	}
 	@Override
-	public List countActualPost() {
-		String query = "SELECT count(*) value FROM POSTS ";
+	public List countActualPost(String userId) {
+		String query = "SELECT count(*) value FROM POSTS where userid != ? ";
 		List postList = new ArrayList();
-		postList = dao.getData(query);
+		postList = dao.getData(query, new Object[]{userId});
 		return postList;
 	}
 
