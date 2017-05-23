@@ -512,3 +512,9 @@ body {
 .filter button {	
     color: #F05F40;
 }
+
+#suggestPostWindow{
+	width: 500px;
+	height: 120px;
+	padding-left: 50px;
+}

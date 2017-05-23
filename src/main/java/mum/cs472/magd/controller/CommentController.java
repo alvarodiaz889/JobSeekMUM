@@ -6,8 +6,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import mum.cs472.magd.entity.Comment;
-import mum.cs472.magd.service.CommentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.gson.Gson;
+
+import mum.cs472.magd.entity.Comment;
+import mum.cs472.magd.service.CommentService;
 
 @Controller
 public class CommentController {
@@ -61,6 +62,23 @@ public class CommentController {
 			model.addAttribute("msg", "Error adding Comment");
 		}
 		}catch(Exception ex){ex.printStackTrace();}
+		return "home";
+	}
+	
+	@RequestMapping(value="/deleteComment")
+	public String deleteComment(HttpServletRequest request,Model model, @RequestParam("commentId") String commentId){
+		boolean flag = false;
+		String msg = "";
+		try{
+			flag = commentService.deleteComment(commentId);
+			if(flag){
+				msg = "Comment deleted Successfully";
+			}
+		} 
+		catch(Exception ex){
+			msg ="Error deleting comment";
+		}
+		model.addAttribute("msg", msg);
 		return "home";
 	}
 }

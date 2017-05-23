@@ -3,7 +3,10 @@ package mum.cs472.magd.controller;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
+
+
 
 
 import mum.cs472.magd.entity.Post;
@@ -12,6 +15,8 @@ import mum.cs472.magd.service.PostService;
 import mum.cs472.magd.service.UserService;
 
 import javax.servlet.http.HttpServletResponse;
+
+
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +80,7 @@ public class PostController {
 		} 
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@RequestMapping(value ="/listUserPosts")
 	public void listUserPosts(HttpServletRequest request,Model model,HttpServletResponse response){	
 		
@@ -117,6 +123,7 @@ public class PostController {
 		return "home";
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unused" })
 	@RequestMapping(value ="/listSuggestPost")
 	public void listSuggestPost(HttpServletRequest request,Model model,HttpServletResponse response) throws IOException{
 		
@@ -131,11 +138,12 @@ public class PostController {
 	}
 	
 	@RequestMapping(value="/deletePost")
-	public String deletePost(HttpServletRequest request, Model model, Post post){
+	public String deletePost(HttpServletRequest request, Model model, 
+			@RequestParam("postId") String postId){
 		
 		boolean flag = false;
 		try{
-			flag = postService.deletePost(post);
+			flag = postService.deletePost(postId);
 			if(flag){
 				model.addAttribute("msg", "Post deleted Succesfully");
 			}
@@ -144,6 +152,26 @@ public class PostController {
 			}
 		}catch(Exception ex){}
 		return "home";
+	}
+	
+	@RequestMapping(value ="/listMyPosts")
+	public void listMyPosts(HttpServletRequest request,Model model,HttpServletResponse response){	
+		
+		List posts = new ArrayList();
+		try{ 
+			String userId = (String)request.getSession(true).getAttribute("userId");
+			posts = postService.getMyPosts(userId);	
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		try {
+			String json =  "" ; 
+			json =new Gson().toJson(posts);
+			response.getWriter().write("{ \"data\":"   + json + " }");
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		} 
 	}
 			
 }
