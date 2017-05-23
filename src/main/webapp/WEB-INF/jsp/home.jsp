@@ -45,7 +45,7 @@
 <body id="page-top">
 	<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
 	<div class="messageSpace" id="messageSpace"></div>
-	
+	<div class="notification-show" style="display: none;"></div>
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">

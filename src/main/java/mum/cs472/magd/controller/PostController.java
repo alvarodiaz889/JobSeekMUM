@@ -173,5 +173,24 @@ public class PostController {
 			System.out.println(e.getMessage());
 		} 
 	}
+	
+	@RequestMapping(value ="/countPosts")
+	public void countPosts(HttpServletRequest request,Model model,HttpServletResponse response){	
+		
+		List posts = new ArrayList();
+		try{ 
+			posts = postService.countActualPost();
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		try {
+			String json =  "" ; 
+			json =new Gson().toJson(posts);
+			response.getWriter().write("{ \"data\":"   + json + " }");
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		} 
+	}
 			
 }
