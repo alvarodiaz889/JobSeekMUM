@@ -17,11 +17,11 @@ public class CommentServiceImpl implements CommentService {
 	@Autowired
 	GenericDao dao;
 	@Override
-	public boolean addComment(Comment comment, String postId, String userId) {
+	public boolean addComment(String comment, String postId, String userId) {
 		boolean flag = false;
-		String query ="INSERT INTO COMMENTS(USERID,POSTID,COMMENT,DATECREATE,DATEUPDATED) "+
+		String query ="INSERT INTO COMMENTS(USERID,POSTID,COMMENT,DATECREATED,DATEUPDATED) "+
 		              "VALUES (?,?,?,SYSDATE(),SYSDATE() )";
-		flag = dao.update(query, new Object[]{userId,postId,comment.getCommentText()});
+		flag = dao.update(query, new Object[]{userId,postId,comment});
 		return flag;
 	}
 	@SuppressWarnings("unchecked")

@@ -526,15 +526,14 @@ body {
 #addPostModal .modal-body {
     min-height: 250px;
 }
-.profileLink img {
+.profile-link .img-circle{
 	width : 40px;
 	border: 2px solid #F05F40;
 }
-
-.img-circle{
-	width: 35px;
+#postDesc{
+    background-color: #fff;
+    padding: 10px;
 }
-
 
 
 

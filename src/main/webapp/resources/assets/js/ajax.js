@@ -5,8 +5,9 @@
 var totalPosts = 0;
 
 $(function(){
-
+	
 	$('.tab-menu li:first-child a').click();
+	//$('.tab-link[data-panel="#panel1"]').click();
 	/*
 	 * Reload Post and MyPosts
 	 */
@@ -85,7 +86,6 @@ $(function(){
 		let type 	= $("#myPostType").val();
 		let body 	= $("#myPostBody").val();
 		let title 	= $("#myPostTitle").val();
-		//console.log(type+" "+body+" "+title);
 		if(type != "" && body != "" && title != ""){
 			$("#myPostSubmit").attr('disabled', false);
 		}
@@ -112,7 +112,7 @@ $(function(){
 			reloadPosts();
 		}).fail(function(){
 			showMessage(errorMsg,"Error Create My Post");
-		})
+		});
 	}
 	
 	//Delete MyPost
@@ -364,9 +364,11 @@ $(function(){
 					text 		: 	'Suggest Post'
 				});
 				let readMore = $('<a>', {
-					'href' 	: 	'#' + postArr[x].postid, 
+					href 	: 	postArr[x].postid, 
 					'class'	:	'readMorePost italic',
-					'text' : 	'..readmore'
+					'text' 	: 	'..readmore', 
+					'data-toggle':	'modal',
+					'data-target':	'#detailModal'
 				});		
 				let hiddenPostid = $('<input>', {
 					'type' 	: 	'hidden', 
@@ -386,7 +388,7 @@ $(function(){
 				let comOneTwobutton = $('<button>', {
 					class	:	'btn bg-primary space-sm comment-btn',
 					'post'	:	postArr[x].postid,
-					'type'	:	'submit',
+					'type'	:	'button',
 					text	:	'Comment'
 				});
 				
@@ -407,8 +409,37 @@ $(function(){
 			$(threeTwo).html(threepTwoh3).append(threepTwoh4).append(limit).append(twoTwo).append(twoThree).append(twoFour);
 		
 			
-			$('#profileLink').attr('id', postArr[x].userid);
+			$('.profile-link').attr('id', postArr[x].userid);
 			$('#panel2').append(main);
+		}
+	}
+	$('#panel2').on('click', 'a.readMorePost', function(){
+		getPost($(this).attr('href'));
+	});
+	function getPost(pid) {		
+		cleanInputs(['#postedBy','#created','#updated','#postCat']);
+		$.get("/JobSeekMum/listUserPosts")
+		.done(function(data){
+			let postArr = JSON.parse(data).data; 
+			for (let x in postArr){
+				if (postArr[x].postid == pid){
+					$('#postTitle').text(postArr[x].posttitle);
+					$('#postedBy').append(postArr[x].fullname);
+					$('#created').append(postArr[x].datecreated);
+					$('#updated').append(postArr[x].dateupdated);
+					$('#postCat').append(postArr[x].posttype);
+					$('#postDesc').text(postArr[x].post);
+				}
+			}
+		})
+		.fail(function(){
+			showMessage(errorMsg, "Error Get Posts");
+		})
+	}
+	
+	function cleanInputs(inputs){
+		for (i in inputs){
+			$(inputs[i]).text('');
 		}
 	}
 	
@@ -418,11 +449,24 @@ $(function(){
 	});
 	
 	$('#panel2').on('click', '.comment-btn', function(e){
-		let textareaId = '#ta'+$(this).attr('post');
-		if($(textareaId).val() == ''){
+		let pId = $(this).attr('post');
+		if($('#ta'+pId).val() == ''){
 			alert('Please write your comment first.');
 		} else {
-			
+			$.ajax("/JobSeekMum/addComment",{
+				"type":"POST",
+				"data": { 
+					"postId"	: pId,
+					"comment"	: $('#ta'+pId).val()
+				}
+			}).done(function(){
+				showMessage(successMsg);
+				console.log("success...");
+			}).fail(function(){console.log(errorMsg);
+				//showMessage(errorMsg,"Error add Comment");
+			});
+			showMessage(successMsg);
+			reloadPosts();
 		}
 	});
 	
@@ -431,9 +475,9 @@ $(function(){
 		$.post("/JobSeekMum/viewComment",{"postId":pid,'async':false}).done(fetchComments).fail(showMessage(errorMsg));		
 	}	
 	
-	function fetchComments(data){alert('data: ' + data);
+	function fetchComments(data){
 		$('#temp-container').text('');
-		let comArr = JSON.parse(data).data; 
+		let comArr = JSON.parse(data).data; console.log(comArr);
 		for (let x in comArr){
 			$('#temp-container').append(
 					comArr[x].commentid+'_'+comArr[x].postid+'_'+comArr[x].fullname+'_'+comArr[x].datecreated+'_'+comArr[x].comment+'-'
@@ -478,7 +522,7 @@ $(function(){
 					
 				//End - DOM for the Comment Section
 					
-					$(mainTwo).html(comOne).append(comOneTwo);
+					$(mainTwo).html(comOne);
 					$(comOne).html(comTwo);
 					$(comTwo).html(comThree).append(comThreeDiv);
 					$(comThree).html(comThreeImg);

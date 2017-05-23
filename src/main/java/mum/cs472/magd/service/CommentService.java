@@ -10,6 +10,6 @@ import org.springframework.stereotype.Service;
 public interface CommentService {
 	
     List<Comment> viewComments(String postId);
-	boolean addComment(Comment comment,String postId,String userId);
+	boolean addComment(String comment,String postId,String userId);
 	boolean deleteComment(String comment);
 }
