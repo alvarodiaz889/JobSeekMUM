@@ -52,11 +52,9 @@ $(function(){
 		$("#messageSpace").empty();
 		$("#messageSpace").fadeIn("slow");
 		$("#messageSpace").append(msg);
-		setTimeout(function(){
-			$("#messageSpace").fadeOut( "slow" );
-			 
-			}
-		, 5000);
+		setTimeout(	function(){
+				$("#messageSpace").fadeOut( "slow" )
+			}, 5000);
 	}
 	
 	var successMsg = "<div class='alert alert-success'><strong>Success!</strong> </div>";
@@ -279,7 +277,10 @@ $(function(){
 				"postId": postId,
 				"toUserId": userId
 			},
-		}).done($("#messageSpace").append(successMsg))
+		}).done(function(){
+			$('#suggestModal').modal('hide');
+			$("#messageSpace").append(successMsg);
+		})
 		  .fail(function(){
 			  showMessage(errorMs, "Error suggest post window");
 		  })
