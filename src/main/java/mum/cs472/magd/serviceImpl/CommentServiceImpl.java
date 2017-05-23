@@ -29,7 +29,8 @@ public class CommentServiceImpl implements CommentService {
 	public List<Comment> viewComments(String postId) {
 		List<Comment> comments  = new ArrayList<>();
 		Object[] params = new Object[]{postId};
-		String query = "SELECT * FROM COMMENTS WHERE POSTID = ?";
+		//String query = "SELECT * FROM COMMENTS WHERE POSTID = ?";
+		String query = "SELECT * FROM COMMENTS c , USERS u WHERE c.userid = u.userid AND postid = ?";
 		comments = dao.getData(query,params);
 		return comments;
 	}
