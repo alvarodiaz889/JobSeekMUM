@@ -25,6 +25,7 @@
 						
 						</div>
 					</div>
+					<div class="hide" id="temp-container"></div>
 					<div class="post-panel panel panel-default hide" id="panel2">
 						
 					</div>

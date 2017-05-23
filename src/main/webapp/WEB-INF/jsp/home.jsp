@@ -56,18 +56,28 @@
             </div>				
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                	<li>
-                		<h5 class="msg">${msg }</h5>
-                	</li>
-                	<li>
-                		<button class="btn bg-primary space-sm" data-toggle="modal" data-target="#addPostModal">+ Add a New Post</button>
-                	</li>
+                <ul class="nav navbar-nav navbar-right">                	
                     <li>
                         <a class="page-scroll" href="#" data-toggle="modal" data-target="#loginModal">LOG IN</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#" data-toggle="modal" data-target="#signupModal">SIGN UP</a>
+                    </li>                   	
+                    <li>
+                    	<a class="page-scroll" href="#"><m:today/></a>
+                   	</li>     
+                </ul>
+                <ul class="nav navbar-nav navbar-right hide">                	
+                	<li>
+                		<button class="btn bg-primary space-sm" data-toggle="modal" data-target="#addPostModal">+ Add a New Post</button>
+                	</li>
+                    <li>
+                        <a class="page-scroll" href="#">LOG OUT</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#" id="profileLink" title="My Profile">
+                        	<img alt="profile link image" class="img-circle" src="<%=request.getContextPath() %>/resources/images/user.jpg">
+                        </a>
                     </li>                   	
                     <li>
                     	<a class="page-scroll" href="#"><m:today/></a>
