@@ -86,5 +86,12 @@ public class PostServiceImpl implements PostService {
 		postList = dao.getData(query, new Object[]{postId});
 		return postList;
 	}
+	@Override
+	public List countActualPost() {
+		String query = "SELECT count(*) value FROM POSTS ";
+		List postList = new ArrayList();
+		postList = dao.getData(query);
+		return postList;
+	}
 
 }

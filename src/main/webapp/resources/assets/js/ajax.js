@@ -2,11 +2,28 @@
  * 
  */
 
-	function showError(){
-		alert("Error");
-	}
-
+var totalPosts = 0;
 $(function(){
+	
+	//Count post
+	function countPost(){
+		$.get("/JobSeekMum/countPosts")
+			.done(function(data){
+				data = JSON.parse(data).data;
+				
+				if(totalPosts != "0"){
+					if(totalPosts != data[0].value){
+						console.log("New Post" + data[0].value + " Previous: " + totalPosts);
+						//$(".notification-show")
+					}
+				}
+				totalPosts = data[0].value;
+				console.log("Total Post: " + totalPosts);
+			});
+	}
+	
+	setInterval(countPost, 5000);
+	
 	function showMessage(msg){
 		$("#messageSpace").empty();
 		$("#messageSpace").fadeIn("slow");
@@ -29,6 +46,8 @@ $(function(){
 	getPosts();
 	//Retrieve MyPosts
 	getMyPosts();
+	//CountPost
+	countPost();
 	
 	/*
 	 * MyPost
@@ -96,7 +115,7 @@ $(function(){
 	
 	//Get MyPosts
 	function getMyPosts() {		
-		$.get("/JobSeekMum/listMyPosts").done(retrieveMyPosts).fail(showError);
+		$.get("/JobSeekMum/listMyPosts").done(retrieveMyPosts).fail(showMessage(errorMsg));
 	}
 	
 	function retrieveMyPosts(data) {
@@ -246,7 +265,7 @@ $(function(){
 		console.log(data);
 	});
 	function getPosts() {		
-		$.get("/JobSeekMum/listUserPosts").done(retrievePosts).fail(showError);
+		$.get("/JobSeekMum/listUserPosts").done(retrievePosts).fail(showMessage(errorMsg));
 	}
 	function retrievePosts(data) {
 		let postArr = JSON.parse(data).data; 
