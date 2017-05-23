@@ -4,17 +4,27 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center posts">
-	                <ul class="nav nav-tabs">
-					  <li role="presentation"><a href="#">Suggested Jobs</a></li>
-					  <li role="presentation"><a href="#">Job Posts</a></li>
-					  <li role="presentation"><a href="#">My Posts</a></li>
-					</ul>
-					<div class="post-panel panel panel-default" id="panel1">
+	                <div class="clearfix">
+		                <ul class="nav nav-tabs tab-menu pull-left">
+						  <li role="presentation"><a href="#" class="tab-link" data-panel="#panel1">Suggested Jobs</a></li>
+						  <li role="presentation"><a href="#" class="tab-link" data-panel="#panel2">Job Posts</a></li>
+						  <li role="presentation"><a href="#" class="tab-link" data-panel="#panel3">My Posts</a></li>
+						</ul>
+		                <div class="pull-right filter">
+			                <div class="input-group">
+						      <input class="form-control" type="text" placeholder="filter by title here">
+						      <span class="input-group-btn">
+						        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+						      </span>
+						    </div>
+					    </div>
+	                </div>
+					<div class="post-panel panel panel-default hide" id="panel1">
 						<div id="mySugPosts">
 						
 						</div>
 					</div>
-					<div class="post-panel panel panel-default" id="panel2">
+					<div class="post-panel panel panel-default hide" id="panel2">
 						
 					</div>
 					<div>
