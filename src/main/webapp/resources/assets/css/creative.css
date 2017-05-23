@@ -535,8 +535,11 @@ body {
 	width: 35px;
 }
 
-
-
+#image{
+	margin: auto;
+	width: 200px;
+	overflow: hidden;
+}
 
 
 
