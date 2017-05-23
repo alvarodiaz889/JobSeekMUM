@@ -39,13 +39,13 @@ $(function(){
 	});
 	
 	//Activate Button MyPost
-	$(".MyPostForm").keydown(function(){
+	$(".MyPostForm").keyup(function(){
 		let type 	= $("#myPostType").val();
 		let body 	= $("#myPostBody").val();
 		let title 	= $("#myPostTitle").val();
-
+		console.log(type+" "+body+" "+title);
 		if(type != "" && body != "" && title != ""){
-			$("#myPostSubmit").removeAttr('disabled');
+			$("#myPostSubmit").attr('disabled', false);
 		}
 	});
 	
@@ -245,6 +245,9 @@ $(function(){
 		$.get("/JobSeekMum/listUserPosts").done(retrievePosts).fail(showError);
 	}
 	
+	function getComments(pid) {				
+		$.post("/JobSeekMum/viewComment",{"postId":pid});//.done(function(data) {console.log(data);return data}).fail(showError);		
+	}	
 	function retrievePosts(data) {
 		let postArr = JSON.parse(data).data; 
 		for (let x in postArr){
@@ -297,9 +300,11 @@ $(function(){
 				'text' 		: 	'view comments'
 			});			
 			let twoFourbtn = $('<button>', {
-				class 		: 'btn bg-primary btn-sug-action', 
+				class 		: 	'btn bg-primary btn-sug-action', 
+				'data-toggle':	'modal',
+				'data-target':	'#suggestModal',
 				'postid' 	: 	postArr[x].postid, 
-				text 		: 'Suggest Post'
+				text 		: 	'Suggest Post'
 			});
 			let readMore = $('<a>', {
 				'href' 	: 	'#' + postArr[x].postid, 
@@ -312,11 +317,14 @@ $(function(){
 				'value' : 	postArr[x].postid
 			});		
 			//getComments(1)
-			let com = getComments(1);
-			console.log("Com: " + com);
-			for (let c in com){
-				console.log(com[c](0));
-			};
+			$.when(getComments(1)).done(function(data){
+				//let com = getComments(1);
+				console.log(data);
+			});
+			
+//			for (let c in com){
+//				console.log(com[c](0));
+//			};
 			
 			$(main).html(one).append(hiddenPostid);
 			$(one).html(two);
@@ -330,12 +338,6 @@ $(function(){
 		
 			$('#panel2').append(main);
 		}
-	}
-	
-	function getComments(pid) {		
-		
-		$.post("/JobSeekMum/viewComment",{"postId":pid}).done(test).fail(showError);		
-		
 	}
 	function test(data){
 		return function(){return data;}

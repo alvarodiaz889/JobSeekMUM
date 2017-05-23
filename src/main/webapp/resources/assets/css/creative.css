@@ -424,7 +424,7 @@ body {
 .modal-content {
 	background-color: #F05F40;
 }
-.form-group>div:first-child {
+#loginModal .form-group>div:first-child, #signupModal .form-group>div:first-child {
     padding-left: 0;
     margin-bottom: 15px;
 }
@@ -517,4 +517,7 @@ body {
 	width: 500px;
 	height: 120px;
 	padding-left: 50px;
+}
+#addPostModal .modal-body {
+    min-height: 250px;
 }
