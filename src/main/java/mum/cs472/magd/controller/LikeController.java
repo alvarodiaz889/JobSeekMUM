@@ -54,7 +54,8 @@ public class LikeController {
 			String json =  "" ; 
 			json =new Gson().toJson(likes);
 			System.out.println(json);
-			response.getWriter().write("{ \"data\":"   + json + " }"); 
+			response.getWriter().write("{ \"data\":"   + json + " }");
+			
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}		
@@ -70,6 +71,22 @@ public class LikeController {
 			ex.printStackTrace();
 		}		
 		return "home";
+	}
+	
+	@RequestMapping(value ="/getLikePerUserPost")
+	public void getLikePerUserPost(HttpServletRequest request,Model model,HttpServletResponse response,
+			@RequestParam("postId") String postId){	
+				
+		try{ 
+			String userId = (String)request.getSession(true).getAttribute("userId");
+			List<Like> likes = likeService.getLastLike(postId, userId);
+			String json =  "" ; 
+			json =new Gson().toJson(likes);
+			System.out.println("AAA" + json);
+			response.getWriter().write("{ \"data\":"   + json + " }"); 	
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
 	}
 
 }
