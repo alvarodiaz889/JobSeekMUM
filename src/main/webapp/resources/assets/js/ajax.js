@@ -142,7 +142,11 @@ $(function(){
 	
 	function retrieveMyPosts(data) {
 	let postArr = JSON.parse(data).data; 
+	let ids = "";
+	
 	for (let x in postArr){
+		
+		ids += postArr[x].postid + ',';
 		let limit = $('<div>', { class : 'limit-text' });
 		let main = $('<div>', { class : 'post-wrapper-my-posts' });
 		let one = $('<div>', { class : 'row' });
@@ -180,11 +184,7 @@ $(function(){
 			class	:	'post-desc',
 			text	:	 postArr[x].post
 		});
-		let twoTwoImg = $('<img>', {
-			alt		:	'like image',
-			src		:	imagePath + 'like.png'
-		});
-		let twoTwoSpan = $('<span>', {class : 'grey-txt', text : '30'});
+						
 		let twoThreea = $('<a>', {
 			class		:	'view-comments italic', 
 			href		: 	'#', 
@@ -217,7 +217,7 @@ $(function(){
 		$(main).html(one).append(hiddenPostid);
 		$(one).html(two);
 		$(two).html(three).append(threeTwo);
-		$(twoTwo).html(twoTwoImg).append(twoTwoSpan);
+		
 		$(twoThree).html(twoThreea);
 		$(twoFour).html(deleteBtn);
 		$(three).html(threeImg).append(threep1).append(threep2).append(threep3);
@@ -227,6 +227,7 @@ $(function(){
 
 		$('#panel3').append(main);
 	}
+	
 }
 	//Get Comments
 	function getMyPosts() {		
@@ -416,8 +417,8 @@ $(function(){
 
 		}
 		
-		$('#replyObj').text(ids);
-		setLikes();
+		$('#replyObj1').text(ids);
+		setLikes(1);
 		
 	}
 	//get Comments
@@ -525,6 +526,7 @@ $(function(){
 			$('#panel2').append(main);
 			return two;
 		}
+		
 	}
 	/*	 *				
 						<div class="row">
@@ -632,10 +634,11 @@ $(function(){
 
 	
 	/******** LIKES *********/
-	function setLikes()
+	function setLikes(obj)
 	{
-		//alert('setLikes');
-		let ids = $('#replyObj').text().split(',');
+		//alert('setLikes' + obj);
+		
+		let ids = $('#replyObj'+obj).text().split(',');
 		if(ids.length > 0)
 		{
 			console.log(ids);
@@ -757,6 +760,7 @@ $(function(){
 	//**4**----------- ajax call
 	function getLikePerUserPost(postId)
 	{
+		
 		$.ajax("/JobSeekMum/getLikePerUserPost",{
 			"type":"POST",
 			"async": "false",
@@ -769,8 +773,9 @@ $(function(){
 	//------------callback------
 	function getLikePerUserPostSuccess(data,b,c,postId)
 	{		
-		//alert('getLikePerUserPostSuccess' + data);
+		console.log('getLikePerUserPostSuccess' + data);
 		let objData = JSON.parse(data).data;
+		//alert(objData.length);
 		if(objData.length > 0)
 		{
 			$("#" + postId + "_input").val(data.likeid);
@@ -779,6 +784,11 @@ $(function(){
 			src = src.replace("like.png","like2.png");
 			$("#" + postId + "_img").attr("src",src);
 		}
+	}
+	
+	function showError()
+	{
+		console.log("ERRORR");
 	}
 		
 });

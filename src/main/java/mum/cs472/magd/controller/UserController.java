@@ -78,4 +78,11 @@ public class UserController {
 		}
 		return "userProfile";
 	}
+	
+	@RequestMapping(value="viewWeather")
+	public String viewWeather(HttpServletRequest request, Model model){
+		String url = "";
+		url = "test";
+		return "weather";
+	}
 }
