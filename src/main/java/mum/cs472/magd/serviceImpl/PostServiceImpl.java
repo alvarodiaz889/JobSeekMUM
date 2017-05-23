@@ -67,7 +67,8 @@ public class PostServiceImpl implements PostService {
 	public List listUserPosts() {
 		List posts = new ArrayList();
 		String query = "SELECT * FROM POSTS P, USERS U " +
-						"WHERE P.USERID = U.USERID ";
+						"WHERE P.USERID = U.USERID " +
+						"ORDER BY P.DATECREATED DESC ";
 		posts = dao.getData(query);
 		return posts;
 	}
@@ -75,7 +76,8 @@ public class PostServiceImpl implements PostService {
 	public List getMyPosts(String userId) {
 		List posts = new ArrayList();
 		String query = "SELECT * FROM POSTS P, USERS U " +
-						"WHERE P.USERID = U.USERID AND P.USERID = ? ";
+						"WHERE P.USERID = U.USERID AND P.USERID = ? " +
+						" ORDER BY P.DATECREATED DESC ";
 		posts = dao.getData(query, new Object[]{userId});
 		return posts;
 	}
