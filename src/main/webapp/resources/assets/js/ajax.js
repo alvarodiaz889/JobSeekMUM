@@ -412,7 +412,7 @@ $(function(){
 			$(threeTwo).html(threepTwoh3).append(threepTwoh4).append(limit).append(twoTwo).append(twoThree).append(twoFour);
 		
 
-			$('#profileLink').attr('id', postArr[x].userid);
+			$('.profileLink').attr('id', postArr[x].userid);
 			$('#panel2').append(main);
 
 		}
@@ -795,8 +795,8 @@ $(function(){
 	/*
 	 * Profile Window
 	 */
-	$("#myProfile").click(function(){
-		$('#profile').modal('show');
+	$("#profileAction").click(function(){
+		$('#profileWindow').modal('show');
 		$.ajax("/JobSeekMum/viewUserProfile",{
 			"type":"POST"
 		}).done(function(data){

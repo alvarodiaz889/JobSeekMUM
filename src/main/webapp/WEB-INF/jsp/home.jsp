@@ -104,9 +104,8 @@
 						</li>
 						<li><a class="page-scroll" href="<%=request.getContextPath()%>/signOut.do">LOG OUT</a></li>
 						<li><a class="page-scroll" href="#" class="profileLink"
-							title="My Profile"> <img alt="profile link image"
+							title="My Profile" id="profileAction"> <img alt="profile link image"
 								class="img-circle"
-								id="myProfile"
 								src="<%=request.getContextPath() %>/resources/images/user.jpg">
 						</a></li>
 						<li><a class="page-scroll" href="#"><m:today /></a></li>
