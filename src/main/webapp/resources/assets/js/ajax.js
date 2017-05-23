@@ -2,10 +2,24 @@
  * 
  */
 
+	function showError(){
+		alert("Error");
+	}
+
 $(function(){
+	function showMessage(msg){
+		$("#messageSpace").empty();
+		$("#messageSpace").fadeIn("slow");
+		$("#messageSpace").append(msg);
+		setTimeout(function(){
+			$("#messageSpace").fadeOut( "slow" );
+			 
+			}
+		, 5000);
+	}
 	
-	var successMsg = "<div class='alert alert-success'><strong>Success!</strong> Indicates a successful or positive action.</div>";
-	var errorMsg = "<div class='alert alert-warning'> <strong>Warning!</strong> Indicates a warning that might need attention.</div>";
+	var successMsg = "<div class='alert alert-success'><strong>Success!</strong> </div>";
+	var errorMsg = "<div class='alert alert-warning'> <strong>Warning!</strong> There is an error.</div>";
 	
 	
 	var imagePath = "/JobSeekMum/resources/images/";
@@ -25,9 +39,9 @@ $(function(){
 	
 	//Activate Button MyPost
 	$(".MyPostForm").keydown(function(){
-		let type = $("#myPostType").val();
-		let body = $("#myPostBody").val();
-		let title = $("#myPostTitle").val();
+		let type 	= $("#myPostType").val();
+		let body 	= $("#myPostBody").val();
+		let title 	= $("#myPostTitle").val();
 
 		if(type != "" && body != "" && title != ""){
 			$("#myPostSubmit").removeAttr('disabled');
@@ -37,28 +51,48 @@ $(function(){
 	//Create MyPost
 	function createMyPost(){
 		let userId = 1;
-		let type = $("#myPostType").val();
-		let body = $("#myPostBody").val();
-		let title = $("#myPostTitle").val();
+		let type 	= $("#myPostType").val();
+		let body 	= $("#myPostBody").val();
+		let title 	= $("#myPostTitle").val();
 		
 		$.ajax("/JobSeekMum/addPost",{
 			"type":"POST",
 			"data": { 
-				"user_id": userId,
-				"postType": type,
-				"postText": body,
-				"postTitle": title
+				"user_id"	: userId,
+				"postType"	: type,
+				"postText"	: body,
+				"postTitle"	: title
 			},
 		}).done(myPostCleanMsg)
-		  .fail(showError);
+		  .fail(showMessage(errorMsg));
 	}
+	
+	//Delete MyPost
+	$('#panel4').on('click', '.delete-post-btn', function() {
+		var postId = $(this).attr("postid");
+		$.ajax("/JobSeekMum/deletePost",{
+			"type"	:"POST",
+			"data"	: { 
+						"postId": postId
+					  },
+		}).done(function(){
+			showMessage(successMsg);
+			//Reload MyPosts
+			$('#panel4').empty();
+			getMyPosts();
+			//Reload Posts
+			$('#panel2').empty();
+			getPosts();
+		})
+		  .fail(showMessage(errorMsg));
+	});
 	
 	//Get MyPosts
 	function getMyPosts() {		
 		$.get("/JobSeekMum/listMyPosts").done(retrieveMyPosts).fail(showError);
 	}
 	
-	function retrieveMyPosts(data) {console.log(data);
+	function retrieveMyPosts(data) {
 	let postArr = JSON.parse(data).data; 
 	for (let x in postArr){
 		let limit = $('<div>', { class : 'limit-text' });
@@ -114,6 +148,12 @@ $(function(){
 			'postid' 	: 	postArr[x].postid, 
 			text 		: 'Suggest Post'
 		});
+		let deleteBtn = $('<button>', {
+			class 		: 'btn bg-primary delete-post-btn', 
+			'postid' 	: 	postArr[x].postid, 
+			text 		: 'Delete Post'
+			
+		});
 		let readMore = $('<a>', {
 			'href' 	: 	'#' + postArr[x].postid, 
 			'class'	:	'readMorePost italic',
@@ -131,7 +171,8 @@ $(function(){
 		$(two).html(three).append(threeTwo);
 		$(twoTwo).html(twoTwoImg).append(twoTwoSpan);
 		$(twoThree).html(twoThreea);
-		$(twoFour).html(twoFourbtn);
+		//$(twoFour).html(twoFourbtn);
+		$(twoFour).html(deleteBtn);
 		$(three).html(threeImg).append(threep1).append(threep2).append(threep3);
 		$(limit).html(threepTwop).append(readMore);
 		$(threeTwo).html(threepTwoh3).append(threepTwoh4).append(limit).append(twoTwo).append(twoThree).append(twoFour);
@@ -149,8 +190,10 @@ $(function(){
 	$('#panel2').on('click', '.btn-sug-action', function() {
 		//Clear items
 		$('#listUserToSug').empty();
+		
 		//Set idPost
 		$("#idPostSug").val($(this).attr("postid"));
+		
 		//Get all users
 		$.ajax("/JobSeekMum/getUsers",{
 			"type":"POST"
@@ -164,7 +207,7 @@ $(function(){
 			});
 			$("#listUserToSug").append(listitems);
 		})
-		  .fail(showError);
+		  .fail(showMessage(errorMsg));
 	});
 	
 	//Action of Suggest Btn in Window
@@ -181,7 +224,7 @@ $(function(){
 				"toUserId": userId
 			},
 		}).done($("#messageSpace").append(successMsg))
-		  .fail(showError);
+		  .fail(showMessage(errorMsg));
 	});
 	
 	
@@ -361,7 +404,7 @@ $(function(){
 				"postId": postId
 			},
 		}).done($("#messageSpace").append(successMsg))
-		  .fail(showError);
+		  .fail(showMessage(errorMsg));
 	}
 	
 	function listSuggestedPosts(){
@@ -369,7 +412,7 @@ $(function(){
 		$.ajax("/JobSeekMum/listSuggestPost",{
 			"type":"POST"
 		}).done(showSuggestedPosts)
-		  .fail(showError);
+		  .fail(showMessage(errorMsg));
 	}
 	
 	function showSuggestedPosts(data){
@@ -404,10 +447,7 @@ $(function(){
                                                                                                                                                                                                                                                                   
 	}
 	
-	function showError(){
-		//Add message Todo
-		alert("Error");
-	}
+
 	
 	/******** LIKES *********/
 	$("#likeImg").click(function(){
@@ -440,7 +480,7 @@ $(function(){
 			}
 		})
 		.done(saveLikeSuccess)
-		  .fail(showError);			
+		  .fail(showMessage(errorMsg));			
 	}
 	
 		
@@ -453,7 +493,7 @@ $(function(){
 				"likeId": likeId
 			}
 		}).done(removeLikeSuccess)
-		  .fail(showError);
+		  .fail(showMessage(errorMsg));
 	}
 	
 	function updateLikes(postId)
@@ -466,7 +506,7 @@ $(function(){
 			}
 		})
 		.done(updateLikesSuccess)
-		  .fail(showError);			
+		  .fail(showMessage(errorMsg));			
 	}
 	
 	//--callbacks--
