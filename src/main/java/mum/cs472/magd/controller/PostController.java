@@ -138,8 +138,9 @@ public class PostController {
 	}
 	
 	@RequestMapping(value="/deletePost")
-	public String deletePost(HttpServletRequest request, Model model, 
-			@RequestParam("postId") String postId){
+	public void deletePost(HttpServletRequest request, Model model, HttpServletResponse response,
+			@RequestParam("postId") String postId
+			) throws IOException{
 		
 		boolean flag = false;
 		try{
@@ -151,7 +152,7 @@ public class PostController {
 				model.addAttribute("msg", "Error deleting post");
 			}
 		}catch(Exception ex){}
-		return "home";
+		response.getWriter().write("{ \"data\":\"ok\" }"); 
 	}
 	
 	@RequestMapping(value ="/listMyPosts")
@@ -161,6 +162,26 @@ public class PostController {
 		try{ 
 			String userId = (String)request.getSession(true).getAttribute("userId");
 			posts = postService.getMyPosts(userId);	
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		try {
+			String json =  "" ; 
+			json =new Gson().toJson(posts);
+			response.getWriter().write("{ \"data\":"   + json + " }");
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		} 
+	}
+	
+	@RequestMapping(value ="/countPosts")
+	public void countPosts(HttpServletRequest request,Model model,HttpServletResponse response){	
+		
+		List posts = new ArrayList();
+		try{ 
+			String userId = (String)request.getSession(true).getAttribute("userId");
+			posts = postService.countActualPost(userId);
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}

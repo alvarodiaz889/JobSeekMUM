@@ -75,6 +75,7 @@ public class GenericDao<T> {
 	// function with no parameterized query and return object
 	@SuppressWarnings("finally")
 	public boolean update(String query, Object[] params) {
+		System.out.println("Query: " + query);
 		boolean flag = false;
 		TransactionDefinition def = new DefaultTransactionDefinition();
 		TransactionStatus status = transactionManager.getTransaction(def);

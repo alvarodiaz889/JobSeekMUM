@@ -42,12 +42,17 @@ public class SessionController {
 			if(user.getEmail()!=null && !user.getEmail().isEmpty() && user.getPassword()!=null && !user.getPassword().isEmpty()){
 				boolean flag = adminSvc.isValid(user);
 				String userId = adminSvc.getUserId(user);
+				List<User> userList = new ArrayList<>();
+				userList = adminSvc.userProfile(userId);
 				if(flag){
 					HttpSession session = request.getSession(false);
 					session = request.getSession(true);
 					session.setAttribute("user", user);
 					session.setAttribute("userId", userId);
 					session.setAttribute("isAdmin", "admin");
+					if(null!=userList && userList.size()>0){
+						session.setAttribute("userInfo", userList);
+					}
 					List<Post> posts = new ArrayList<>();
 					posts = postService.getPosts();
 					model.addAttribute("posts", posts);

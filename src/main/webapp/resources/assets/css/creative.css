@@ -424,7 +424,7 @@ body {
 .modal-content {
 	background-color: #F05F40;
 }
-.form-group>div:first-child {
+#loginModal .form-group>div:first-child, #signupModal .form-group>div:first-child {
     padding-left: 0;
     margin-bottom: 15px;
 }
@@ -491,11 +491,56 @@ body {
 }
 .sugjobs{
 	padding: 10px;
-
+}
+.tab-menu li {
+	background: none;
+}
+.tab-menu li a{
+	background-color: beige;
+}
+.tab-menu li a.active-tab{
+	background-color: #F05F40;
+    color: #fff;
+    border-radius: 0;
+}
+.filter {
+    width: 300px;
+}
+.filter input {
+    height: 26px;
+}
+.filter button {	
+    color: #F05F40;
 }
 
 #suggestPostWindow{
-	width: 500px;
+	width: 100%;
 	height: 120px;
 	padding-left: 50px;
+	padding-top: 5px;
+	background-color: white;
 }
+.btn bg-primary{
+	padding-left: 50px;
+}
+#addPostModal .modal-body {
+    min-height: 250px;
+}
+.profileLink img {
+	width : 40px;
+	border: 2px solid #F05F40;
+}
+
+.img-circle{
+	width: 35px;
+}
+
+
+
+
+
+
+
+
+
+
