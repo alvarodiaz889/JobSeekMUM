@@ -57,7 +57,7 @@ public class PostServiceImpl implements PostService {
 		List listSugPosts = new ArrayList();
 		String query = "SELECT P.POSTID,P.POSTTITLE,U.FULLNAME FROM POSTS P, USERS U, SUGGESTPOST SP " +
 						"WHERE P.POSTID = SP.POSTID " +
-						"AND P.USERID = U.USERID " +
+						"AND SP.USERID = U.USERID " +
 						" AND SP.TOUSERID = ?";
 		listSugPosts = dao.getData(query, new Object[]{userId});
 		return listSugPosts;
